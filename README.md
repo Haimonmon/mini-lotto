@@ -1,2 +1,2 @@
-# mini-lotto
-a mini lotto that use web socketting 
+# Minimart Lotto 🎉
+[ Note ] ReadMe Instruction on the way
