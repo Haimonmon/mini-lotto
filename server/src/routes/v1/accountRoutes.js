@@ -38,4 +38,11 @@ accountRouter.get('/profile', authentication, account.profile.bind(account));
  */
 accountRouter.patch('/', authentication, account.updatePassword.bind(account));
 
+/**
+ * user topUp
+ * @method POST
+ * path /v1/account/topup/
+ */
+accountRouter.patch('/topup', authentication, account.addMoney.bind(account));
+
 export default accountRouter;

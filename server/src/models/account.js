@@ -3,7 +3,7 @@ import { encryptPassword } from '../utils/hash.js';
 
 class User{
     constructor(){
-        this.user = new connection();
+        this.user = connection;
     }
 
     /**
@@ -14,21 +14,22 @@ class User{
      * @returns - return the data back to the response of the accountController
      */
     async createAccount(username,password,userMoney){
-        const [existingUser] = await connection.execute(
-            'SELECT username, email FROM users WHERE username = ?',
-            [username],
-        )
-        if (existingUser.length > 0){
-            if (existingUser[0].username === username){
-                throw new Error('username')
-            }
-        }
+        // const [existingUser] = await connection.execute(
+        //     'SELECT username FROM users WHERE username = ?',
+        //     [username],
+        // )
+        // if (existingUser.length > 0){
+        //     if (existingUser[0].username === username){
+        //         throw new Error('username')
+        //     }
+        // }
 
         const hashPassword = encryptPassword(password)
         const [result,] = await connection.execute(
-            'INSERT INTO users(username, password) VALUES (?, ?, ?)',
+            'INSERT INTO user(username, password, user_money) VALUES (?, ?, ?)',
             [username,hashPassword, userMoney],
         );
+        console.log(result)
         return result;
     }
     /**
@@ -40,10 +41,12 @@ class User{
     async verify(username,password){
         try{
             const hashPassword = encryptPassword(password);
+            console.log(hashPassword)
             const [result,] = await connection.execute(
                 'SELECT user_id, username FROM user WHERE username = ? AND password = ?',
                 [username, hashPassword],
             );
+            console.log(result)
             return result?.[0];
         } catch (err){
             console.error('<error> user.verify', err);
@@ -96,6 +99,19 @@ class User{
             return result;
         } catch (err){
             console.error('<error> user.updateUser', err);
+            throw err;
+        }
+    }
+
+    async topUp(money, userId){
+        try{
+            const result = await connection.execute(
+                'UPDATE user SET user_money = ? WHERE user_id = ?',
+                [money,userId],
+            );
+            return result;
+        } catch (err){
+            console.error('<error> user.topUp', err)
             throw err;
         }
     }

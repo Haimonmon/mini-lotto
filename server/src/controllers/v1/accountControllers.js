@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 class AccountController{
     constructor(){
-        this.user = new User;
+        this.user = new User();
     }
 
     /**
@@ -27,7 +27,7 @@ class AccountController{
         } catch(err){
            res.send({
                 success: false,
-                message: err.message === 'username' || err.message === 'password'
+                message: err
            })
         }
     }
@@ -43,12 +43,13 @@ class AccountController{
             const { username, password } = req.body || {};
 
             const result = await this.user.verify(username,password);
+            console.log(result?.user_id)
 
-            if (!result.user_id){
+            if(result?.user_id){
                 return res.send({
                     success: false,
-                    message: 'Invalid password'
-                });
+                    message: 'Invalid username or password',
+                })
             } else {
                 res.send({
                     success: true,
@@ -74,7 +75,7 @@ class AccountController{
      */
     async profile(req, res){
         try{
-            const userInfo = await this.user.getUser(res.locals.username);
+            const userInfo = await this.user.getProfile(res.locals.username);
             res.send({
                 success: true,
                 data: {
@@ -142,6 +143,22 @@ class AccountController{
             })
         }
     }
+    async addMoney(req, res){
+        try{
+            const { money } = req.body || {};
+            const result = await this.user.topUp(money, res.locals.user_id);
+            res.send({
+                success: true,
+                message: 'Top up successfully.'
+            })
+        } catch (err){
+            res.send({
+                success: false,
+                message: err.toString()
+            })
+        }
+    }
+
 }
 
 export default AccountController;
