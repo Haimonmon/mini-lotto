@@ -45,7 +45,7 @@ class AccountController{
             const result = await this.user.verify(username,password);
             console.log(result?.user_id)
 
-            if(result?.user_id){
+            if(!result?.user_id){
                 return res.send({
                     success: false,
                     message: 'Invalid username or password',

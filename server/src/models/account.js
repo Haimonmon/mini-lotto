@@ -106,7 +106,7 @@ class User{
     async topUp(money, userId){
         try{
             const result = await connection.execute(
-                'UPDATE user SET user_money = ? WHERE user_id = ?',
+                'UPDATE user SET user_money + ? WHERE user_id = ?',
                 [money,userId],
             );
             return result;
