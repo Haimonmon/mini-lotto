@@ -1,4 +1,4 @@
-import Pot from "../../models/pot.js";
+ import Pot from "../../models/pot.js";
 
 class PotController {
     constructor() {
@@ -13,7 +13,6 @@ class PotController {
     async getPot(req, res) {
         try {
             const amount = await this.pot.getPotAmount();
-            console.log(amount);
             res.send({
                 success: true,
                 data: { potAmount: amount }
@@ -27,7 +26,7 @@ class PotController {
     }
 
     /**
-     * Update the pot amount
+     * Update the pot amount and notify clients
      * @param {amount} req - The amount to be added to the pot
      * @param {success, message} res - Response indicating success or failure
      */
@@ -41,6 +40,10 @@ class PotController {
         }
         try {
             await this.pot.updatePot(amount);
+            
+            // Emit event to update all connected clients
+            io.emit("potUpdated", { potAmount: amount });
+
             res.send({
                 success: true,
                 message: "Pot updated successfully",
@@ -54,7 +57,7 @@ class PotController {
     }
 
     /**
-     * Roll over the pot if there is no winner
+     * Roll over the pot if there is no winner and notify clients
      * @param {userBets} req - The total user bets to be added to the pot
      * @param {success, message} res - Response indicating success or failure
      */
@@ -68,6 +71,10 @@ class PotController {
         }
         try {
             await this.pot.rollOverPot(userBets);
+            
+            // Emit event to notify all clients
+            io.emit("potUpdated", { potAmount: userBets });
+
             res.send({
                 success: true,
                 message: "Pot rolled over successfully",

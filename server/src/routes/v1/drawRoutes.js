@@ -20,6 +20,6 @@ drawRouter.post("/", authentication, draw.createDraw.bind(draw));
  * @method GET
  * path /v1/draw/latest
  */
-drawRouter.get("/latest", authentication, draw.getLatestDraw.bind(draw));
+// drawRouter.get("/latest", authentication, draw.getLatestDraw.bind(draw));
 
 export default drawRouter;
