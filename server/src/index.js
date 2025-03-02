@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/v1', cors(), v1);
 
-// Attach io to the app so controllers can use it
+// Attach io to the app so controllers can use it.
 app.set("io", io);
 
 // Start the lotto timer
