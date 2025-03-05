@@ -1,6 +1,5 @@
 desktop.ini
 node_modules
-features
-locales
-services
+api
 .env
+test
