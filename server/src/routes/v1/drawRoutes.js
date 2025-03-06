@@ -13,7 +13,7 @@ drawRouter.use(authorization);
  * @method POST
  * path /v1/draw/
  */
-drawRouter.post("/", authentication, draw.createDraw.bind(draw));
+drawRouter.post("/", draw.createDraw.bind(draw));
 
 /**
  * Get the latest draw result

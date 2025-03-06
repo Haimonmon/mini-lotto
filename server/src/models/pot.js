@@ -17,15 +17,25 @@ class Pot {
         }
     }
 
-    async updatePot(amount) {
+    async updatesPot(amount) {
         try {
-            const [result] = await this.db.execute(
-                "UPDATE pot_money SET pot_amount = pot_amount + ? WHERE pot_id = 1",
-                [amount]
+            // ✅ Get the current pot amount
+            const [potData] = await this.db.execute(
+                "SELECT pot_amount FROM pot_money ORDER BY pot_id DESC LIMIT 1"
             );
-            return result;
+    
+            let currentPot = potData.length > 0 ? potData[0].pot_amount : 1000;
+            let updatedPot = currentPot + amount;
+    
+            // ✅ Update the existing pot instead of inserting a new one
+            await this.db.execute(
+                "UPDATE pot_money SET pot_amount = ? WHERE pot_id = (SELECT MAX(pot_id) FROM pot_money)",
+                [updatedPot]
+            );
+    
+            return updatedPot; // ✅ Return updated amount
         } catch (err) {
-            console.error("<error> pot.updatePot", err);
+            console.error("<error> Pot.updatePot", err);
             throw err;
         }
     }

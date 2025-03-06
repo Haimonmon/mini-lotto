@@ -39,7 +39,7 @@ class PotController {
             });
         }
         try {
-            await this.pot.updatePot(amount);
+            await this.pot.updatesPot(amount);
             
             // Emit event to update all connected clients
             io.emit("potUpdated", { potAmount: amount });

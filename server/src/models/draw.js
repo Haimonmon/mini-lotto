@@ -13,9 +13,12 @@ class DrawResult {
     async storeDrawResult(winningNumbers) {
         try {
             // Ensure winningNumbers is a string
+            console.log(winningNumbers)
             const winningNumbersStr = Array.isArray(winningNumbers) 
                 ? winningNumbers.join('-') 
                 : winningNumbers;
+
+            console.log('wew', winningNumbersStr)
     
             // ✅ Fetch the latest pot_id
             const [potData] = await this.db.execute(
@@ -43,7 +46,7 @@ class DrawResult {
                 'INSERT INTO draw_result (winning_no, created_at, user_id, pot_id, bet_id) VALUES (?, NOW(), ?, ?, ?)',
                 [winningNumbersStr, safeWinningUserId, safePotId, safeWinningBetId]
             );
-    
+            console.log("nigga",result)
             return result;
         } catch (err) {
             console.error("<error> DrawResult.storeDrawResult", err);

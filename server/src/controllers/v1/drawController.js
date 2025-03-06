@@ -1,4 +1,4 @@
-import { getIO } from "../../core/socket.js"; // ✅ Import getIO()
+import { getIO } from "../../core/socket.js"; 
 import DrawResult from "../../models/draw.js";
 import Bet from "../../models/bet.js";
 import Pot from "../../models/pot.js";
@@ -8,64 +8,69 @@ class DrawResultController {
         this.drawResult = new DrawResult();
         this.bet = new Bet();
         this.pot = new Pot();
+        // ✅ Start with a round ID
+        this.currentRoundId = Date.now(); 
     }
 
-    /**
-     * Generate a random draw result with 6 unique numbers between 1 and 45
-     * @returns {string} Winning numbers in "XX-XX-XX-XX-XX-XX" format
-     */
     generateWinningNumbers() {
         const numbers = new Set();
         while (numbers.size < 6) {
             numbers.add(Math.floor(Math.random() * 45) + 1);
         }
-        return Array.from(numbers).sort((a, b) => a - b); // Return array
+        return Array.from(numbers).sort((a, b) => a - b);
     }
-    
 
-    /**
-     * Create a draw result and store it in the database
-     * Also, process bets to check for winners and update the pot
-     */
     async createDraw() {
-        // ✅ Use getIO() to get socket instance
-        const io = getIO(); 
+        const io = getIO();
 
         try {
             const winningNumbers = this.generateWinningNumbers();
             const response = await this.drawResult.storeDrawResult(winningNumbers);
 
-            // Process bets
-            const allBets = await this.bet.getAllBets();
+            console.log("🎉 Winning Numbers:", winningNumbers);
+
+            // ✅ Fetch only bets for the current round
+            const allBets = await this.bet.getBetsByRound(this.currentRoundId);
             let totalLostAmount = 0;
             let winningUsers = [];
 
             for (const bet of allBets) {
-                if (bet.bet_number === winningNumbers) {
+                // ✅ Convert bet_number "XX-XX-XX-XX-XX-XX" into an array
+                const betNumbersArray = bet.bet_number.split("-").map(Number);
+
+                // ✅ Compare sorted arrays for an exact match
+                if (JSON.stringify(betNumbersArray.sort()) === JSON.stringify(winningNumbers)) {
                     winningUsers.push(bet.user_id);
                 } else {
                     totalLostAmount += bet.bet_amount;
                 }
             }
 
+            // ✅ Add lost bets to the pot
             if (totalLostAmount > 0) {
                 await this.pot.updatePot(totalLostAmount);
             }
 
-            // Emit draw result event to all connected clients
-            io.emit("draw_result", {
+            // ✅ Emit the result directly
+            const drawResult = {
                 drawId: response.insertId,
                 winningNumbers,
-                totalLostAmount,
                 winningUsers
-            });
+            };
+
+            console.log("🔥 Emitting draw_result:", drawResult);
+            io.emit("drawResult", drawResult);
+
+            // ✅ Start a new round
+            this.currentRoundId = Date.now();
 
             return {
                 success: true,
                 message: "Draw result stored and bets processed successfully.",
-                data: { drawId: response.insertId, winningNumbers, totalLostAmount, winningUsers },
+                data: drawResult,
             };
         } catch (err) {
+            console.error("❌ Error in createDraw:", err);
             return {
                 success: false,
                 message: err.toString(),
