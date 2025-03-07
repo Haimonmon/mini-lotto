@@ -18,7 +18,7 @@ const createServer = () => {
     });
 
     // * Finds the " public " Folder on Project File Structure
-    const staticPath = path.resolve(__dirname, '../../public');
+    const staticPath = path.resolve(__dirname, '../../build');
     const fileConnection = connectToMain(staticPath, app)
 
     return { app, server, io, fileConnection }

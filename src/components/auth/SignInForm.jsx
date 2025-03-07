@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
 import passwordIcon from "../../assets/PASSWORD-UNHIDE-STATE.png";
 
 /**
@@ -8,6 +9,34 @@ import passwordIcon from "../../assets/PASSWORD-UNHIDE-STATE.png";
  */
 const Form = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        try {
+            const payload = { username, password };
+
+            const response = await axios.post("http://localhost:8000/v1/account/login", payload, {
+                headers: { 
+                    apikey: "nigga" 
+                },
+            });
+
+            if (response.data.success) {
+                localStorage.setItem("token", response.data.data.token);
+                navigate("/home");
+            } else {
+                throw new Error(response.data.message || "Login failed");
+            }
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
     return (
         <div className="form-container">
@@ -16,17 +45,18 @@ const Form = () => {
                 <p>Don't have an account? <Link to="/sign-up" className="link">Sign up</Link></p>
             </div>
 
-            <div className="sign-inputs">
-                <input type="text" id="username" placeholder="Username"/>
-                <input type={showPassword ? "text" : "password"} id="password" placeholder="Password"/>
+            <form className="sign-inputs" onSubmit={handleLogin}>
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                <input type="text" id="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                <input type={showPassword ? "text" : "password"} id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 <div className="show-password-container">
                     <img src={passwordIcon} alt=""/>
-                    <span>Show Password</span>
+                    <span>{showPassword ? "Hide" : "Show"} Password</span>
                 </div>
                 <div className="lets-go-btn-container">
-                    <button>Let's Go</button>
+                    <button type="submit">Let's Go</button>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }
