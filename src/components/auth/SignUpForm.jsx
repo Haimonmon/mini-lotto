@@ -23,7 +23,7 @@ const Form = () => {
 
             const response = await axios.post("http://localhost:8000/v1/account/", payload, {
                 headers: { 
-                    apikey: "nigga" 
+                    apikey: "your apikey go here" 
                 },
             });
 
