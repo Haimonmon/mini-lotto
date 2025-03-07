@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-const MainContainer = ({ children }) => {
+import "../styles/container.css";
+
+const MainContainer = ({size,  children }) => {
     return (
-        <div className="main-container">{ children }</div>
+        <div className={`main-container ${size}`}>{ children }</div>
     )
 }
 
