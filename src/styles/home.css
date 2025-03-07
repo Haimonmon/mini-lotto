@@ -1,0 +1,34 @@
+/* 
+.main-container {
+    width: 1041px;
+    height: 676px;
+    background-color: #FFEFD7;
+    border: 1.5px solid #1C1611;
+    display: flex;
+}
+
+.side-bar-container,
+main {
+    height: 676px;
+    background-color: #FFEFD7;
+}
+
+.side-bar-container {
+    width: 70px;
+    border-right: 1.5px solid #1C1611;
+    box-shadow: 11px 0px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+
+main {
+    width: 100%;
+}
+
+.profile-bar-container {
+    height: 67px;
+    width: 100%;
+    background-color: #F6D93C;
+    border-bottom: 1.5px solid #1C1611;
+} */
+

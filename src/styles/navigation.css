@@ -1,0 +1,116 @@
+
+
+/* * Navigation styles */
+
+/* TODO: Heres for the necessity container */
+.necessity-container {
+    margin-top: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    box-sizing: border-box;
+}
+
+#crown-logo {
+    width: 28px;
+}
+
+#home-page-button,
+#profile-page-button {
+    width: 57px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#home-page-button {
+    gap: 5px;
+}
+
+#profile-page-button {
+    gap: 8px;
+}
+
+#home-page-button img {
+    width: 29px;
+}
+
+#home-page-button span {
+    font-family: var(--font-medium);
+    font-size: 0.8rem;
+}
+
+#profile-page-button img {
+    width: 24px;
+}
+
+#profile-page-button span {
+    font-family: var(--font-medium);
+    font-size: 0.7rem;
+}
+
+/* TODO: Heres for the support container */
+
+.support-container {
+    width: 100%;
+    height: 100px;
+    margin-top: 160px;
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#support-page-button,
+#settings-page-button,
+#logout-button {
+    width: 57px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#settings-page-button {
+    gap: 7px;
+}
+
+#support-page-button {
+    gap: 7px;
+}
+
+#logout-button {
+    gap: 7px;
+}
+
+#settings-page-button img {
+    width: 28px;
+}
+
+#settings-page-button span {
+    font-family: var(--font-medium);
+    font-size: 0.6rem;
+}
+
+#support-page-button img {
+    width: 28px;
+}
+
+#support-page-button span {
+    font-family: var(--font-medium);
+    font-size: 0.7rem;
+}
+
+#logout-button img {
+    width: 25px;
+}
+
+#logout-button span {
+    font-family: var(--font-medium);
+    font-size: 0.7rem;
+}

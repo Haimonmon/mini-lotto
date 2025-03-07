@@ -1,0 +1,13 @@
+:root {
+    --font-regular: 'IBM Plex Mono';
+    --font-medium: 'IBM Plex Mono Medium';
+}
+
+body {
+    background-color: #FFEFD7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}

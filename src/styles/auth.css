@@ -1,34 +1,7 @@
-body {
-    background-color: #FFEFD7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.main-container {
-    width: 905px;
-    height: 595px;
-    background-color: #FFEFD7;
-    border: 1.5px solid #1C1611;
-    display: flex;
-}
-
-.side-bar-container,
 .site-description-container,
 .form-container {
-    height: 595px;
     background-color: #FFEFD7;
 }
-
-.side-bar-container {
-    width: 51px;
-    border-right: 1.5px solid #1C1611;
-    box-shadow: 11px 0px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
 
 .site-description-container {
     width: 506px;
@@ -117,6 +90,10 @@ body {
     flex-direction: column;
 }
 
+.account-creation-text a {
+    color: black;
+}
+
 .title-sign {
     font-family: var(--font-regular);
     font-weight: 500;
@@ -176,6 +153,7 @@ body {
 .show-password-container span {
     font-family: var(--font-regular);
     font-size: 0.9rem;
+    color: black;
 }
 
 #username {
