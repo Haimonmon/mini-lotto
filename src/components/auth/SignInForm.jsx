@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import passwordIcon from "../../assets/PASSWORD-UNHIDE-STATE.png";
 
 /**
@@ -11,8 +12,8 @@ const Form = () => {
     return (
         <div className="form-container">
             <div className="account-creation-text">
-                <span className="title-sign">Create an account</span>
-                <p>Have an account? <span className="link">Spin in</span></p>
+                <span className="title-sign">Spin in</span>
+                <p>Don't have an account? <Link to="/sign-up" className="link">Sign up</Link></p>
             </div>
 
             <div className="sign-inputs">
