@@ -1,17 +1,17 @@
-import Form from "../components/auth/Form";
+import Form from "../components/auth/SignInForm.jsx";
 import MainContainer from "../components/MainContainer";
 import EmptySideBar from "../components/auth/EmptySidebar";
 import SiteDescription from "../components/auth/siteDescription";
 
-import "../../public/public.css"
-import "../styles/auth.css"
+import "../styles/public.css";
+// import "../styles/auth.css";
 
 /**
  * Just a sign in
  */
-const SignIn = () => {
+const SignIn  = () => {
     return (
-        <MainContainer>
+        <MainContainer size="small">
             <EmptySideBar/>
             <SiteDescription/>
             <Form/>
@@ -19,4 +19,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn;
+export default SignIn ;
