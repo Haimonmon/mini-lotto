@@ -35,16 +35,6 @@ const NavigationBar = () => {
 
             <div className="support-container">
 
-                <div id="settings-page-button">
-                    <img src={SettingsIcon} alt="settings page icon"/>
-                    <span>Settings</span>
-                </div>
-
-                <div id="support-page-button">
-                    <img src={TieIcon} alt="support page icon"/>
-                    <span>Support</span>
-                </div>
-
                 <div id="logout-button">
                     <img src={PlaneThatHitTheTowerIcon} alt="logout page icon"/>
                     <span>Log out</span>
