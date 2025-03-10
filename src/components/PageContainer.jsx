@@ -6,7 +6,9 @@ const PageContainer = ({ children }) => {
     return (
         <main>
             <ProfileBarContainer/>
-            { children }
+            <div className="main-inner-container">
+                { children }
+            </div>
         </main>
     )
 }
