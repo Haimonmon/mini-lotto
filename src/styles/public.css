@@ -1,6 +1,21 @@
+@font-face {
+    font-family: 'Roboto Mono Medium';
+    src: url('../assets/Roboto_Mono/RobotoMono-VariableFont_wght.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Roboto Mono Regular';
+    src: url('../assets/Roboto_Mono/RobotoMono-VariableFont_wght.ttf');
+    font-weight: 400;
+}
+
 :root {
     --font-regular: 'IBM Plex Mono';
     --font-medium: 'IBM Plex Mono Medium';
+
+    --font-num-regular: 'Roboto Mono Regular';
+    --font-num-medium: 'Roboto Mono Medium';
 }
 
 body {

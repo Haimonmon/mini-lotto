@@ -1,34 +1,123 @@
-/* 
-.main-container {
-    width: 1041px;
-    height: 676px;
-    background-color: #FFEFD7;
+/* * Home page styles */
+.pot-money-outer-container {
     border: 1.5px solid #1C1611;
+    height: 293px;
+    width: 100%;
+    margin-bottom: 1.2%;
+    padding: 0.6%;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
     display: flex;
+    box-sizing: border-box;
 }
 
-.side-bar-container,
-main {
-    height: 676px;
-    background-color: #FFEFD7;
+.pot-money-inner-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #1C1611;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
 }
 
-.side-bar-container {
-    width: 70px;
+.pot-money-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 4%;
+    width: 43.4%;
+}
+
+.pot-money-container span {
+    font-family: var(--font-num-medium);
+    font-size: 3.3rem;
+}
+
+.pot-money-container hr {
+    border: none; 
+    height: 4px; 
+    background-color: black;
+    width: 100%; 
+}
+
+
+.timer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1.5px solid #1C1611;
     border-right: 1.5px solid #1C1611;
-    box-shadow: 11px 0px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    border-left: 1.5px solid #1C1611;
+    width: 175px;
+    height: 31px;
+    box-sizing: border-box;
+}
+
+.timer-container span {
+    font-family: var(--font-num-medium);
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+.place-bet-container {
+    border: 1.5px solid #1C1611;
+    width: 100%;
+    height: 240px;
+    box-sizing: border-box;
+}
+
+/* * Winning Numbers CSS Codes 🎉 */
+.winning-num-container {
+    display: flex;
+    width: 43.3%;
+    height: 23%;
+    justify-content: center;
+    gap: 7%;
+    margin-top: 2%;
+    font-size: 1.2rem;
+    margin-bottom: 5%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+#num1, #num2, #num3,
+#num4, #num5, #num6 {
+    border-top: 2px solid #1C1611;
+    border-bottom: 2px solid #1C1611;
+    width: 60px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-num-regular);
+    box-sizing: border-box;
+}
+
+#num1-holder-border, #num2-holder-border, #num3-holder-border,
+#num4-holder-border, #num5-holder-border, #num6-holder-border {
+    width: 16px;
+    height: 13px;
+    background-color: #1C1611;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 
-main {
-    width: 100%;
-}
-
-.profile-bar-container {
-    height: 67px;
-    width: 100%;
+.inner-holder {
+    width: 13px;
+    height: 11px;
     background-color: #F6D93C;
-    border-bottom: 1.5px solid #1C1611;
-} */
-
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    position: absolute;
+    bottom: 5%;
+    box-sizing: border-box;
+}
