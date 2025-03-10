@@ -1,58 +1,35 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import TimerComponent from './TimerComponent.jsx';
+import { io } from "socket.io-client";
 import '../../styles/home.css';
+import DrawComponent from "./Draw.Component.jsx";
+
+const socket = io("http://localhost:3000");
 
 const MoneyPotContainer = () => {
+    const [potAmount, setPotAmount] = useState(1000000);
+    useEffect(() => {
+        // ✅ Listen for pot updates
+        socket.on("pot_update", (data) => {
+            console.log("💰 New Pot Amount:", data.amount.pot_amount);
+            setPotAmount(data.amount.pot_amount);
+        });
+        return () => {
+            socket.off("pot_update");
+            socket.off("draw_result");
+        };
+    });
     return (
         <div className="pot-money-outer-container">
             <div className="pot-money-inner-container">
                 <div className="pot-money-container">
-                    <span>$ 20,000,000</span>
-                    <hr/>
+                    <span>${potAmount.toLocaleString()}</span> {/* Format as currency */}
+                    <hr />
                 </div>
 
-                <div className="winning-num-container">
-                    <div id="num1">
-                    <span>5</span>
-                    <div id="num1-holder-border">
-                        <div className="inner-holder"></div>
-                    </div>
-                    </div>
-                    <div id="num2">
-                    <span>20</span>
-                    <div id="num2-holder-border">
-                        <div className="inner-holder"></div>
-                    </div>
-                    </div>
-                    <div id="num3">
-                    <span>19</span>
-                    <div id="num3-holder-border">
-                        <div className="inner-holder"></div>
-                    </div>
-                    </div>
-                    <div id="num4">
-                    <span>3</span>
-                    <div id="num4-holder-border">
-                        <div className="inner-holder"></div>
-                    </div>
-                    </div>
-                    <div id="num5">
-                    <span>11</span>
-                    <div id="num5-holder-border">
-                        <div className="inner-holder"></div>
-                    </div>
-                    </div>
-                    <div id="num6">
-                    <span>9</span>
-                    <div id="num6-holder-border">
-                        <div className="inner-holder"></div>
-                    </div>
-                    </div>
-                </div>
+                <DrawComponent />
 
-                <div className="timer-container">
-                    <span>00 : 00 : 60</span>
-                </div>
+                <TimerComponent />
 
             </div>
         </div>
