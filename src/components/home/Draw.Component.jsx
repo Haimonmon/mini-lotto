@@ -28,57 +28,76 @@ const DrawComponent = () => {
 
     return (
                 <div className="winning-num-container">
+                    
                     {winningNumbers.length > 0 ? (
-                        winningNumbers.map((num, index) => (
-                            <div key={index} id={`num${index + 1}`}>
-                                <span>{num}</span>
-                                <div id={`num${index + 1}-holder-border`}>
-                                    <div className="inner-holder"></div>
-                                </div>
-                            </div>
-                        ))
+                        onlineDrawComponent()
                     ) : (
-                <div className="winning-num-container">
-                    <div id="num1">
-                        <span>0</span>
-                        <div id="num1-holder-border">
-                            <div className="inner-holder"></div>
-                        </div>
-                    </div>
-                    <div id="num2">
-                        <span>0</span>
-                        <div id="num2-holder-border">
-                            <div className="inner-holder"></div>
-                        </div>
-                    </div>
-                    <div id="num3">
-                        <span>0</span>
-                        <div id="num3-holder-border">
-                            <div className="inner-holder"></div>
-                        </div>
-                    </div>
-                    <div id="num4">
-                        <span>0</span>
-                        <div id="num4-holder-border">
-                            <div className="inner-holder"></div>
-                        </div>
-                    </div>
-                    <div id="num5">
-                        <span>0</span>
-                        <div id="num5-holder-border">
-                            <div className="inner-holder"></div>
-                        </div>
-                    </div>
-                    <div id="num6">
-                        <span>0</span>
-                        <div id="num6-holder-border">
-                            <div className="inner-holder"></div>
-                        </div>
-                    </div>
-                </div>
+                        offlineDrawComponent()
                     )}
+                    
                 </div>
     );
 };
 
+const onlineDrawComponent = ({winningNumbers}) => {
+    return (
+        <>
+            {winningNumbers.map((num, index) => (
+                <div key={index} id={`num${index + 1}`}>
+                    <span>{num}</span>
+                    <div id={`num${index + 1}-holder-border`}>
+                        <div className="inner-holder"></div>
+                    </div>
+                </div>
+            ))}
+        </>
+    );
+}
+
+
+/**
+ * Returns default component if draw is not active
+ */
+const offlineDrawComponent = () => {
+    return (
+        <>
+            <div id="num1">
+                <span>0</span>
+                <div id="num1-holder-border">
+                    <div className="inner-holder"></div>
+                </div>
+            </div>
+            <div id="num2">
+                <span>0</span>
+                <div id="num2-holder-border">
+                    <div className="inner-holder"></div>
+                </div>
+            </div>
+            <div id="num3">
+                <span>0</span>
+                <div id="num3-holder-border">
+                    <div className="inner-holder"></div>
+                </div>
+            </div>
+            <div id="num4">
+                <span>0</span>
+                <div id="num4-holder-border">
+                    <div className="inner-holder"></div>
+                </div>
+            </div>
+            <div id="num5">
+                <span>0</span>
+                <div id="num5-holder-border">
+                    <div className="inner-holder"></div>
+                </div>
+            </div>
+            <div id="num6">
+                <span>0</span>
+                <div id="num6-holder-border">
+                    <div className="inner-holder"></div>
+                </div>
+            </div>
+        </>
+    );
+}
 export default DrawComponent;
