@@ -35,11 +35,18 @@
     box-sizing: border-box;
 }
 
+.side-bar-container.large a {
+    text-decoration: none;
+    color: #1C1611;
+}
+
 .profile-bar-container {
-    height: 65px;
+    height: 60px;
     width: 100%;
     background-color: #F6D93C;
     border-bottom: 1.5px solid #1C1611;
+    display: flex;
+    gap: 19rem;
     box-sizing: border-box;
 }
 

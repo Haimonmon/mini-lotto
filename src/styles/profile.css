@@ -11,7 +11,6 @@
 
 
 .cash-in-container {
-    border: 1.5px solid #1C1611;
     width: 100%;
     height: 275px;
 }
@@ -85,6 +84,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .profile-image img {
@@ -99,6 +99,7 @@
     display: flex;
     font-family: var(--font-regular);
     font-size: 0.8rem;
+    box-sizing: border-box;
 }
 
 .bets-container,
@@ -110,6 +111,7 @@
     justify-content: center;
     height: 100%;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .bets-container {
@@ -166,6 +168,7 @@
     position: relative;
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .balance-container {
@@ -180,10 +183,95 @@
     align-items: center;
     justify-content: center;
     height: 40px;
+    box-sizing: border-box;
 }
 
 #wallet-money {
     font-family: var(--font-num-medium);
     font-size: 3rem;
     margin-top: 13%;
+}
+
+
+/* * Cash in */
+.cash-in-container {
+    width: 100%;
+    height: 280px;
+}
+
+.cash-in-title-container {
+ width: 100%;
+ height: 60px;
+ display: flex;
+ flex-direction: column;
+ justify-content: end;
+ gap: 0.3rem;
+}
+
+#cash-in-title {
+    width: 95px;
+    height: 25px;
+    background-color: #F98E58;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-regular);
+    font-size: 0.8rem;
+}
+
+#cash-in-sub-title {
+    font-family: var(--font-regular);
+    font-size: 0.8rem;
+}
+
+.cash-in-cards {
+    display: flex;
+    align-items: end;
+    gap: 1.5%;
+    width: 100%;
+    height: 220px;
+}
+
+.cash-in-cards hr {
+    margin: 0;
+    border: none;
+    height: 195px;
+    background-color: #1C1611;
+    width: 1.5px;
+}
+
+#card-1, #card-2, #card-3,
+#card-4, #card-5, #card-6 {
+    width: 165px;
+    height: 195px;
+    background-color: #FFEFD7;
+    border: 1.5px solid #1C1611;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+
+#card-1-title, #card-2-title, #card-3-title,
+#card-4-title, #card-5-title, #card-6-title {
+    width: 100%;
+    height: 35px;
+    font-family: var(--font-regular);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F98E58;
+    border-top: 1.5px solid #1C1611;
+    box-sizing: border-box;
+}
+
+
+#card-1-price-value, #card-2-price-value, #card-3-price-value,
+#card-4-price-value, #card-5-price-value, #card-6-price-value {
+    font-family: var(--font-num-regular);
+    font-size: 1.8rem;
+    margin-bottom: 5rem;
 }
