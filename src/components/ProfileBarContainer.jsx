@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 import QuestionableGamblersIcon from '../assets/user-question-svgrepo-com.svg';
+import ProfilePicture from '../assets/0c42be6660f5afc7cf6e7e32c43496ca.jpg';
+import NotificationIcon from '../assets/notification.png';
 
 const ProfileBarContainer = () => {
     return (
@@ -21,7 +23,19 @@ const ProfileBarContainer = () => {
                     </div>
                   </div>
                 </div>
-            <div className="account-container"></div>
+
+            <div className="account-container">
+                  <div class="profile-picture-container">
+                    <img src={ProfilePicture} alt=""/>
+                  </div>
+                  <div class="profile-name-container">
+                    <span id="profile-gambler-username">Mr Nikas</span>
+                    <span id="profile-gambler-title">God Gambler</span>
+                  </div>
+                  <div class="profile-notification-container">
+                    <img src={NotificationIcon} alt=""/>
+                  </div>
+            </div>
         </nav>
     )
 }
