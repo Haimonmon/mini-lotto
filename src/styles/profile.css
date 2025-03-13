@@ -187,3 +187,18 @@
     font-size: 3rem;
     margin-top: 13%;
 }
+
+/*laptop small*/
+@media screen and (max-width: 1024px) {
+    
+}
+
+/*Tablet*/
+@media screen and (max-width: 930px){
+    
+}
+
+/* MObile*/
+@media screen and (max-width: 660px){
+
+}

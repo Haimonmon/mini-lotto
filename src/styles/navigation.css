@@ -156,3 +156,21 @@
     font-family: var(--font-medium);
     font-size: 0.7rem;
 }
+
+/*laptop small*/
+@media screen and (max-width: 1280px) {
+    .support-container{
+        margin-top: 0;
+        height: 55%;
+    }
+}
+
+/*Tablet*/
+@media screen and (max-width: 930px){
+    
+}
+
+/* MObile*/
+@media screen and (max-width: 660px){
+
+}
