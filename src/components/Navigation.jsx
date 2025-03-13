@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import CozyGamblerIcon from "../assets/crown (1).png";
 import DiceIcon from "../assets/dice-3-svgrepo-com.svg";
 import ProfileIcon from "../assets/profile-image-1349-svgrepo-com.svg";
-import SettingsIcon from "../assets/settings-svgrepo-com.svg";
-import TieIcon from "../assets/tie-svgrepo-com.svg";
 import PlaneThatHitTheTowerIcon from "../assets/airplane-svgrepo-com.svg";
 
 import "../styles/navigation.css";
@@ -22,15 +20,20 @@ const NavigationBar = () => {
 
                 <img src={CozyGamblerIcon} id="crown-logo"/>
 
-                <div id="home-page-button">
-                    <img src={DiceIcon} alt="home page icon"/>
-                    <span>Home</span>
-                </div>
-
-                <div id="profile-page-button">
-                    <img src={ProfileIcon} alt="profile page icon"/>
-                    <span>Profile</span>
-                </div>
+                <Link to="/home">
+                    <div id="home-page-button">
+                        <img src={DiceIcon} alt="home page icon"/>
+                        <span>Home</span>
+                    </div>
+                </Link>
+              
+                <Link to="/profile">
+                    <div id="profile-page-button">
+                        <img src={ProfileIcon} alt="profile page icon"/>
+                        <span>Profile</span>
+                    </div>
+                </Link>
+               
             </div>
 
             <div className="support-container">
@@ -44,5 +47,7 @@ const NavigationBar = () => {
         </nav>
     )
 }
+
+{/* <Link to="/sign-up" className="link">Sign up</Link> */}
 
 export default NavigationBar;
