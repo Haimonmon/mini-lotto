@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import QuestionableGamblersIcon from '../assets/user-question-svgrepo-com.svg';
 import ProfilePicture from '../assets/0c42be6660f5afc7cf6e7e32c43496ca.jpg';
 import NotificationIcon from '../assets/notification.png';
+import logoIcon from '../assets/crown (1).png';
 
 const ProfileBarContainer = () => {
     return (
@@ -31,6 +32,7 @@ const ProfileBarContainer = () => {
                   <div class="profile-name-container">
                     <span id="profile-gambler-username">Mr Nikas</span>
                     <span id="profile-gambler-title">God Gambler</span>
+                    <img className="pfp-logo" src={logoIcon} alt=""></img>
                   </div>
                   <div class="profile-notification-container">
                     <img src={NotificationIcon} alt=""/>

@@ -222,6 +222,10 @@
     font-size: 0.7rem;
 }
 
+.pfp-logo{
+    display: none;
+}
+
 /*laptop small*/
 @media screen and (max-width: 1280px) {
     .support-container{
@@ -232,10 +236,39 @@
 
 /*Tablet*/
 @media screen and (max-width: 930px){
-    
+    .account-container{
+        width: 250px;
+    }
 }
 
 /* MObile*/
 @media screen and (max-width: 660px){
+    .gamblers-hub-container{
+        display: none;
+    }
 
+    .account-container{
+        width: 100%;
+    }
+
+    .profile-name-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #profile-gambler-username, #profile-gambler-title{
+        display: none;
+    }
+
+    .profile-picture-container img{
+        display: none;
+    }
+
+    .pfp-logo{
+        display: block;
+        width: 25px;
+        height: 25px;
+    }
 }
