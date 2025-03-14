@@ -1,3 +1,14 @@
+#error-message {
+    font-size: 0.9rem;
+    font-family: var(--font-regular);
+    height: 20px;
+    width: 84%;
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .site-description-container,
 .form-container {
     background-color: #FFEFD7;
