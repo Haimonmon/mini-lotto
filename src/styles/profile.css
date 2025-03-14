@@ -131,7 +131,7 @@
 .gambler-achievements-container hr {
     width: 50px;
     height: 1.5px;
-    border: none;
+    border: 1px solid;
 }
 
 .bets-container img {
@@ -168,6 +168,7 @@
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
     box-sizing: border-box;
 }
 
@@ -189,7 +190,7 @@
 #wallet-money {
     font-family: var(--font-num-medium);
     font-size: 3rem;
-    margin-top: 13%;
+    margin-bottom: 50px;
 }
 
 
@@ -282,17 +283,171 @@
 } */
 
 /*laptop small*/
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) {
+    .gambers-profile-container{
+        height: 200px;
+    }
+
+    .profile-container{
+        padding: 2%;
+    }
+
+    .profile-container hr{
+        margin: 7%;
+    }
+
+    .gambler-name-container{
+        height: 50px;
+    }
+
+    #gambler-joined-date{
+        margin: 10px;
+    }
+
+    .profile-image{
+        height: 50px;
+        width: 73px;
+    }
+
+    .gambler-achievements-container{
+        height: 78px;
+    }
+
+    .cash-in-container{
+        height: 230px;
+    }
+
+    .cash-in-cards{
+        height: 175px;
+    }
+
+    .cash-in-cards hr {
+        height: 175px;
+    }
+
+    #card-1-price-value, #card-2-price-value, #card-3-price-value, #card-4-price-value, #card-5-price-value, #card-6-price-value {
+        margin-bottom: 3rem;
+    }
     
 }
 
 /*Tablet*/
 @media screen and (max-width: 930px){
-    
+    .gambers-profile-container{
+        width: 580px;
+    }
+
+    .profile-container{
+        width: 250px;
+    }
+
+    .wallet-outer-container{
+        width: 200px;
+    }
+
+    .history-container{
+        width: 130px;
+    }
+
+    #wallet-money{
+        font-size: 2rem;
+        margin-bottom: 25px;
+    }
+
+    .cash-in-container{
+        height: 100px;
+    }
+
+    .cash-in-cards{
+        align-items: normal;
+        height: 150px;
+        padding: 25px 0 0 0;
+    }
+
+    .cash-in-cards hr{
+        height: 150px;
+    }
+
+    #card-1, #card-2, #card-3,
+    #card-4, #card-5, #card-6 {
+        height: auto;
+        width: 120px;
+    }
 }
 
 /* MObile*/
 
-/* @media screen and (max-width: 660px){
+@media screen and (max-width: 660px){
+    .cash-in-container{
+        display: none;
+    }
 
-} */
+    .gambers-profile-container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-container hr{
+        margin: 7% 0 7% 0;
+    }
+
+    .profile-container{
+        order: -1;
+        border: none;
+        width:100%;
+        padding: 15px 35px 10px 35px;
+    }
+
+    .history-container{
+        order: 1;
+        width: 100%;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-right: none;
+    }
+
+    .bets-container{
+        width: 100%;
+    }
+
+    .luck-container{
+        width: 100%;
+    }
+
+    .jackpots-container{
+        width: 100%;
+    }
+
+    .gambler-achievements-container{
+        height: auto;
+    }
+
+    .gambler-achievements-container hr{
+        width: 80%;
+        background-color: #1C1611;
+    }
+
+    .wallet-outer-container{
+        order: 2;
+        width: 100%;
+    }
+
+    #gambler-name{
+        font-size: 2rem;
+    }
+
+    #gambler-joined-date{
+        margin: 0;
+    }
+
+    .gambler-name-container{
+        height: 70px;
+    }
+
+    .profile-image{
+        width: 100px;
+        height: 70px;
+    }
+}
