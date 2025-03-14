@@ -1,4 +1,5 @@
 import React from "react";
+import logoIcon from "../../assets/crown (1).png";
 
 /**
  * can be witty 👌
@@ -7,7 +8,7 @@ import React from "react";
 const SiteDescription = () => {
     return (
         <div className="site-description-container">
-            <div className="image-container"></div>
+            <div className="image-container"><img src={logoIcon} alt="logo" className="logo"></img></div>
             <div className="text-description-container">
                 <div className="name-container">
                     <h2>Just A Lottery Lmao</h2>

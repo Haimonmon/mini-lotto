@@ -28,6 +28,9 @@
 .image-container {
     width: 506px;
     height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #FFEFD7;
 }
 
@@ -192,6 +195,11 @@
     font-weight: 700px;
 }
 
+.image-container .logo{
+    width: 250px;
+    height: 160px;
+}
+
 
 /*laptop small*/
 @media screen and (max-width: 1280px) {
@@ -203,6 +211,12 @@
         width: 490px;
         height: 300px;
     }
+
+    .image-container .logo{
+        width: 245px;
+        height: 150px;
+    }
+
     .text-description-container{
         width: 490px;
         height: 140px;
@@ -222,11 +236,18 @@
 /* Tablet */
 @media screen and (max-width: 930px){
     .site-description-container{
-        width: 390px;
+        width: auto;
+        border: none;
     }
     .image-container{
         width: 390px;
     }
+
+    .image-container .logo{
+        width: 195px;
+        height: 150px;
+    }
+
     .text-description-container{
         width: 390px;
     }
@@ -254,6 +275,33 @@
 }
 
 /* MObile*/
-@media screen and (max-width: 660px){
+@media screen and (max-width: 600px){
+    .form-container{
+        width: auto;
+        padding: 0 0 25px 0;
+    }
 
+    .text-description-container{
+        display: none;
+    }
+
+    .section-button-container{
+        display: none;
+    }
+
+    
+
+    .image-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: 150px;
+        padding: 0 60px 0 60px;
+    }
+
+    .image-container .logo{
+        width: 100px;
+        height: 100px;
+    }
 }
