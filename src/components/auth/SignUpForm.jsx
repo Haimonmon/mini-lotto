@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import passwordIcon from "../../assets/PASSWORD-UNHIDE-STATE.png";
+
+import { signUpUser } from "../../api/auth/AuthenticationAPI";
+
+import passwordIconUnHide from "../../assets/PASSWORD-UNHIDE-STATE.png";
+import passwordIconHide from "../../assets/PASSWORD-HIDE-STATE.png";
 
 /**
  * Sign in and Sign up forms
@@ -18,14 +21,18 @@ const Form = () => {
         e.preventDefault();
         setError("");
 
-        try {
-            const payload = { username, password };  
+        if (username.length < 8 || username.length > 10) {
+            setError("Username must be at least 8 characters long.");
+            return;
+        }
 
-            const response = await axios.post("http://localhost:8000/v1/account/", payload, {
-                headers: { 
-                    apikey: "your apikey go here" 
-                },
-            });
+        if (password.length < 8 || password.length > 14) {
+            setError("Password must be at least 10 characters long.");
+            return;
+        }
+
+        try {
+            const response = await signUpUser(username, password);
 
             if (response.data.success) {
                 navigate("/");
@@ -45,11 +52,18 @@ const Form = () => {
             </div>
 
             <form className="sign-inputs" onSubmit={handleSignup}>
-                {error && <p style={{ color: "red" }}>{error}</p>}
+                <span id="error-message">{error}</span>
                 <input type="text" id="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
                 <input type={showPassword ? "text" : "password"} id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 <div className="show-password-container">
-                    <img src={passwordIcon} alt=""/>
+                    <img
+                     id="show-password-icon"
+                     src={showPassword ? passwordIconHide : passwordIconUnHide} 
+                     alt="password-visibility"
+                     onClick={() => {
+                        setShowPassword(!showPassword)
+                     }}
+                    />
                     <span>{showPassword ? "Hide" : "Show"} Password</span>
                 </div>
                 <div className="lets-go-btn-container">

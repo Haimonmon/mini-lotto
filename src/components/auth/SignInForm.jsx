@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
-import passwordIcon from "../../assets/PASSWORD-UNHIDE-STATE.png";
+
+import { signInUser } from "../../api/auth/AuthenticationAPI";
+
+import passwordIconHide from "../../assets/PASSWORD-HIDE-STATE.png";
+import passwordIconUnHide from "../../assets/PASSWORD-UNHIDE-STATE.png";
 
 /**
  * Sign in and Sign up forms
@@ -19,16 +22,13 @@ const Form = () => {
         setError("");
 
         try {
-            const payload = { username, password };
+            const response = await  signInUser(username, password);
 
-            const response = await axios.post("http://localhost:8000/v1/account/login", payload, {
-                headers: { 
-                    apikey: "your apikey go here" 
-                },
-            });
+            // console.log(response);
 
             if (response.data.success) {
-                localStorage.setItem("token", response.data.data.token);
+                sessionStorage.setItem("token", response.data.data.token);
+                sessionStorage.setItem("username", username);
                 navigate("/home");
             } else {
                 throw new Error(response.data.message || "Login failed");
@@ -46,11 +46,17 @@ const Form = () => {
             </div>
 
             <form className="sign-inputs" onSubmit={handleLogin}>
-                {error && <p style={{ color: "red" }}>{error}</p>}
+                <span id="error-message">{error}</span>
                 <input type="text" id="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
                 <input type={showPassword ? "text" : "password"} id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 <div className="show-password-container">
-                    <img src={passwordIcon} alt=""/>
+                    <img
+                        src={showPassword ? passwordIconHide : passwordIconUnHide} 
+                        alt=""
+                        onClick={() => {
+                            setShowPassword(!showPassword)
+                        }}
+                     />
                     <span>{showPassword ? "Hide" : "Show"} Password</span>
                 </div>
                 <div className="lets-go-btn-container">

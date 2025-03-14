@@ -30,7 +30,7 @@ const DrawComponent = () => {
                 <div className="winning-num-container">
                     
                     {winningNumbers.length > 0 ? (
-                        onlineDrawComponent()
+                        onlineDrawComponent(winningNumbers)
                     ) : (
                         offlineDrawComponent()
                     )}
@@ -39,7 +39,7 @@ const DrawComponent = () => {
     );
 };
 
-const onlineDrawComponent = ({winningNumbers}) => {
+const onlineDrawComponent = (winningNumbers) => {
     return (
         <>
             {winningNumbers.map((num, index) => (

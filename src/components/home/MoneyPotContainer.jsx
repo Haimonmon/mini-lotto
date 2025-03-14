@@ -12,8 +12,8 @@ const MoneyPotContainer = () => {
     useEffect(() => {
         // ✅ Listen for pot updates
         socket.on("pot_update", (data) => {
-            console.log("💰 New Pot Amount:", data.amount.pot_amount);
-            setPotAmount(data.amount.pot_amount);
+            console.log("💰 New Pot Amount:", data.data.amount.pot_amount);
+            setPotAmount(data.data.amount.pot_amount);
         });
         return () => {
             socket.off("pot_update");
