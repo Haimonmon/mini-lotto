@@ -3,7 +3,7 @@
     border: 1.5px solid #1C1611;
     height: 293px;
     width: 100%;
-    margin-bottom: 1.2%;
+    margin-bottom: 2%;
     padding: 0.6%;
     box-sizing: border-box;
     align-items: center;
@@ -120,4 +120,35 @@
     position: absolute;
     bottom: 5%;
     box-sizing: border-box;
+}
+
+
+/*laptop small*/
+@media screen and (max-width: 1280px) {
+    .pot-money-outer-container{
+        height: 210px;
+    }
+    .pot-money-container{
+        width: auto;
+        margin: 0;
+        padding-top: 10px;
+    }
+
+    .pot-money-container span{
+        font-size: 2.2rem;
+    }
+
+    .place-bet-container{
+        height: 210px;
+    }
+}
+
+/*Tablet*/
+@media screen and (max-width: 930px){
+    
+}
+
+/* MObile*/
+@media screen and (max-width: 660px){
+
 }

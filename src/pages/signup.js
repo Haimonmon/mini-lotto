@@ -11,7 +11,7 @@ import "../styles/public.css";
  */
 const SignUp = () => {
     return (
-        <MainContainer>
+        <MainContainer size="small">
             <EmptySideBar/>
             <SiteDescription/>
             <Form/>

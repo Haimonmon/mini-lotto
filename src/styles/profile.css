@@ -251,6 +251,7 @@
     justify-content: end;
     flex-direction: column;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 
@@ -275,3 +276,23 @@
     font-size: 1.8rem;
     margin-bottom: 5rem;
 }
+/* 
+* {
+    box-sizing: border-box;
+} */
+
+/*laptop small*/
+@media screen and (max-width: 1024px) {
+    
+}
+
+/*Tablet*/
+@media screen and (max-width: 930px){
+    
+}
+
+/* MObile*/
+
+/* @media screen and (max-width: 660px){
+
+} */

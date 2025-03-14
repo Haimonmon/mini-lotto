@@ -180,3 +180,69 @@
     font-family: var(--font-regular);
     font-weight: 700px;
 }
+
+
+/*laptop small*/
+@media screen and (max-width: 1280px) {
+    .site-description-container{
+        width: 490px;
+        height: auto;
+    }
+    .image-container{
+        width: 490px;
+        height: 300px;
+    }
+    .text-description-container{
+        width: 490px;
+        height: 140px;
+    }
+
+    .section-button-container{
+        width: 490px;
+        height: auto;
+    }
+
+    .form-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Tablet */
+@media screen and (max-width: 930px){
+    .site-description-container{
+        width: 390px;
+    }
+    .image-container{
+        width: 390px;
+    }
+    .text-description-container{
+        width: 390px;
+    }
+
+    .description-container p {
+        width: 90%;
+    }
+
+    .section-button-container{
+        width: 390px;
+    }
+
+    .title-sign{
+        font-size: 1.5rem;
+    }
+    .account-creation-text p {
+        font-size: 0.8rem;
+    }
+    #username{
+        margin-bottom: 15%;
+    }
+    .lets-go-btn-container{
+        margin-top: 5%;
+    }
+}
+
+/* MObile*/
+@media screen and (max-width: 660px){
+
+}

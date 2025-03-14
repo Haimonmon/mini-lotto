@@ -20,9 +20,33 @@
 
 body {
     background-color: #FFEFD7;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* margin: 0 auto;
+    max-width: 1330px; */
+    margin: 0;
+    padding: 0;
+}
+
+#root{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+}
+
+
+/*laptop small*/
+@media screen and (max-width: 1024px) {
+    
+}
+
+/*Tablet*/
+@media screen and (max-width: 930px){
+    
+}
+
+/* MObile*/
+@media screen and (max-width: 660px){
+
 }
