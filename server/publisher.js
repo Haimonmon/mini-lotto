@@ -41,6 +41,35 @@ const fetchLatestDraw = async () => {
 fetchLatestDraw()
 
 
+// ✅ Function to fetch the latest bets without duplicates
+const fetchLatestBets = async () => {
+  try {
+      const { data } = await axios.get("http://localhost:8000/v1/bets/latestBets", {
+          headers: { apikey: "nigga" }
+      });
+
+      if (!data.bets || data.bets.length === 0) return; // No new bets
+
+      // 🔥 Filter out bets that were already emitted
+      const newBets = data.bets.filter(bet => bet.bet_id > lastEmittedBetId);
+
+      if (newBets.length > 0) {
+          console.log("🎲 New Bets:", newBets);
+
+          // ✅ Emit only the new bets
+          io.emit("bet_update", newBets);
+
+          // 🔥 Update the last emitted bet ID (take the highest one)
+          lastEmittedBetId = Math.max(...newBets.map(bet => bet.bet_id));
+      }
+  } catch (error) {
+      console.error("❌ Failed to fetch latest bets:", error.message);
+  }
+};
+
+// ✅ Fetch latest bets every 5 seconds
+setInterval(fetchLatestBets, 5000);
+
 
 let onlineUsers = []; // Store online users
 

@@ -3,15 +3,41 @@ import placeBet from "../../api/home/PlaceBetAPI";
 
 const PlaceBetContainer = () => {
     const [chosenNumbers, setChosenNumbers] = useState(["", "", "", "", "", ""]);
-    const [selectedBetAmount, setSelectedBetAmount] = useState(10); // Default to $10
+    const [selectedBetAmount, setSelectedBetAmount] = useState(20);
+    const [invalidNumbers, setInvalidNumbers] = useState([]);
+    const [hasErrors, setHasErrors] = useState(false);
+    const [liveBets, setLiveBets] = useState([]);
 
-  
     const handleNumberChange = (index, value) => {
         if (!/^\d*$/.test(value)) return; 
 
         const updatedNumbers = [...chosenNumbers];
         updatedNumbers[index] = value;
+
         setChosenNumbers(updatedNumbers);
+        validateNumbers(updatedNumbers);
+    };
+
+    const validateNumbers = (numbers) => {
+        const numberSet = new Set();
+        let errors = [];
+        let hasEmptyFields = false;
+    
+        numbers.forEach((num, index) => {
+            if (num === "") {
+                hasEmptyFields = true;
+                errors.push(index);
+            } else if (parseInt(num) > 45 || numberSet.has(num)) {
+                errors.push(index);
+            } else {
+                numberSet.add(num);
+            }
+        });
+    
+        setInvalidNumbers(errors);
+        setHasErrors(errors.length > 0);
+    
+        return hasEmptyFields;
     };
 
    
@@ -21,6 +47,18 @@ const PlaceBetContainer = () => {
 
     
     const handlePlaceBet = async () => {
+        const hasEmptyFields = validateNumbers(chosenNumbers);
+
+        if (hasEmptyFields) {
+            alert("Missing numbers! Please fill in all fields.");
+            return;
+        }
+
+        if (hasErrors) {
+            alert("Invalid chosen number bet!");
+            return;
+        }
+
         const formattedBetNumbers = chosenNumbers.join("-");
         console.log("Betting on:", formattedBetNumbers);
         console.log("Bet Amount:", selectedBetAmount);
@@ -44,17 +82,21 @@ const PlaceBetContainer = () => {
         <div className="place-bet-container">
             <div className="ready-bet">
                 <div className="chosen-number-container">
-                    <input type="text" value={chosenNumbers[0]} maxLength="2" onChange={(e) => handleNumberChange(0, e.target.value)} className="chosen-winning-num-1"/>
-                    <input type="text" value={chosenNumbers[1]} maxLength="2" onChange={(e) => handleNumberChange(1, e.target.value)} className="chosen-winning-num-2"/>
-                    <input type="text" value={chosenNumbers[2]} maxLength="2" onChange={(e) => handleNumberChange(2, e.target.value)} className="chosen-winning-num-3"/>
-                    <input type="text" value={chosenNumbers[3]} maxLength="2" onChange={(e) => handleNumberChange(3, e.target.value)} className="chosen-winning-num-4"/>
-                    <input type="text" value={chosenNumbers[4]} maxLength="2" onChange={(e) => handleNumberChange(4, e.target.value)} className="chosen-winning-num-5"/>
-                    <input type="text" value={chosenNumbers[5]} maxLength="2" onChange={(e) => handleNumberChange(5, e.target.value)} className="chosen-winning-num-6"/>
+                    {chosenNumbers.map((num, index) => (
+                        <input 
+                            key={index}
+                            type="text"
+                            value={num}
+                            maxLength="2"
+                            onChange={(e) => handleNumberChange(index, e.target.value)}
+                            className={invalidNumbers.includes(index) ? "error-input" : ""}
+                        />
+                    ))}
                 </div>
 
                 <div className="place-bet-button-containern">
-                    <div className={`bet-card-1 ${selectedBetAmount === 10 ? "selected-card" : ""}`} onClick={() => handleBetSelection(10)}>
-                        <span>$10</span>
+                    <div className={`bet-card-1 ${selectedBetAmount === 20 ? "selected-card" : ""}`} onClick={() => handleBetSelection(20)}>
+                        <span>$20</span>
                     </div>
                     <div className={`bet-card-2 ${selectedBetAmount === 50 ? "selected-card" : ""}`} onClick={() => handleBetSelection(50)}>
                         <span>$50</span>
