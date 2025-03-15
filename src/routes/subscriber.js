@@ -12,8 +12,22 @@ publisherSocket.on('connect', () => {
 });
 
 publisherSocket.on('countdown', (time) => {
-  console.log(`Received countdown: ${time}`);
   io.emit('countdown', time);
+});
+
+publisherSocket.on('pot_update', (data) => {
+  console.log(`💰 Pot Update:`, data);
+  io.emit('pot_update', data);
+});
+
+publisherSocket.on('bet_update', (data) => {
+  console.log(`🎲 New Bets:`, data);
+  io.emit('bet_update', data);
+});
+
+publisherSocket.on('draw_result', (data) => {
+  console.log(`🎯 Draw Result:`, data);
+  io.emit('draw_result', data);
 });
 
 /* Function to find an available port
