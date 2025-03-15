@@ -13,7 +13,9 @@ export const signUpUser = async (username, password) => {
     try {
         const payload = { username, password };
         const response = await axios.post("http://localhost:8000/v1/account/", payload, {
-            headers: { apikey: API_KEY },
+            headers: { 
+                apikey: API_KEY,
+             },
         });
 
         return response
