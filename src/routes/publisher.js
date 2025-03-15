@@ -42,7 +42,7 @@ fetchLatestDraw()
 // ✅ Function to fetch the latest bets without duplicates
 const fetchLatestBets = async () => {
   try {
-      const { data } = await axios.get("http://localhost:8000/api/latestBets", {
+      const { data } = await axios.get("http://localhost:8000/v1/bets/latestBets", {
           headers: { apikey: "nigga" }
       });
 
