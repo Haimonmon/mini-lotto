@@ -166,7 +166,7 @@
 }
 
 #profile-page-button {
-    gap: 8px;
+    gap: 5px;
 }
 
 #home-page-button img {
@@ -179,7 +179,7 @@
 }
 
 #profile-page-button img {
-    width: 20px;
+    width: 25px;
 }
 
 #profile-page-button span {
@@ -226,6 +226,8 @@
     display: none;
 }
 
+
+
 /*laptop small*/
 @media screen and (max-width: 1280px) {
     .support-container{
@@ -270,5 +272,53 @@
         display: block;
         width: 25px;
         height: 25px;
+    }
+
+    .bottom-container{
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 0;
+    }
+
+    .bottom-container a.active {
+        background-color: #ffee00;
+        color: white;
+        transform: scale(1.1);
+        transition: all 0.2s ease-in-out;
+        box-shadow: 9px 0px 0px rgba(0, 0, 0, 0.2);
+        padding: 5px 10px;
+        text-decoration: none;
+    }
+
+
+    .bottom-container a {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        border-right: 2px solid #1C1611;
+        text-decoration: none;
+
+    }
+
+    #logout-button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    #logout-button span {
+        font-family: var(--font-medium);
+        font-size: 1rem;
+    }
+    #home-page-button span{
+        font-family: var(--font-medium);
+        font-size: 1rem;
+    }
+    #profile-page-button span {
+        font-family: var(--font-medium);
+        font-size: 1rem;
     }
 }

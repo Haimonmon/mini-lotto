@@ -6,7 +6,8 @@ import "../styles/auth.css";
  */
 const EmptyBottomBar = () => {
     return (
-        <nav className="bottom-bar-container small">.</nav>
+        <nav className="bottom-bar-container small">
+        </nav>
     )
 }
 

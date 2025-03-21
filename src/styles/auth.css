@@ -274,7 +274,7 @@
 }
 
 /* MObile*/
-@media screen and (max-width: 600px){
+@media screen and (max-width: 660px){
     .form-container{
         width: auto;
         padding: 0 0 25px 0;

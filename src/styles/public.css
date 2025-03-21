@@ -27,12 +27,14 @@ body {
     max-width: 1330px; */
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 #root{
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
 

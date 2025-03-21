@@ -1,6 +1,7 @@
 import MainContainer from "../components/MainContainer.jsx";
 import NavigationBar from "../components/Navigation.jsx";
 import PageContainer from "../components/PageContainer.jsx";
+import BottomNavigation from "../components/BottomNavBar.jsx";
 
 import GamblersProfileContainer from "../components/profile/GamblersProfileContainer.jsx";
 import CashInContainer from "../components/profile/CashInContainer.jsx";
@@ -12,7 +13,8 @@ const Profile = () => {
             <NavigationBar/>
             <PageContainer>
                 <GamblersProfileContainer/>
-                <CashInContainer/>                
+                <CashInContainer/>
+                <BottomNavigation />                
             </PageContainer>
         </MainContainer>
     );

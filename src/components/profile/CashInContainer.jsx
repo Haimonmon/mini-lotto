@@ -1,15 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { addMoney } from "../../api/ProfileApi";
 
 const CashInContainer = () => {
     const [message, setMessage] = useState("");
+    const scrollContainerRef = useRef(null);
+    const [activeCard, setActiveCard] = useState(null);
+    
+    const cards = [
+        { id: "card-1", price: "$20", title: "Rookie Gambler", value: 20 },
+        { id: "card-2", price: "$100", title: "Casual Better", value: 100 },
+        { id: "card-3", price: "$500", title: "Risk Taker", value: 500 },
+        { id: "card-4", price: "$1K", title: "High Roller", value: 1000 },
+        { id: "card-5", price: "$10K", title: "Jackpot Dreamer", value: 10000 },
+    ];
+
+    useEffect(() => {
+        const scrollContainer = scrollContainerRef.current;
+        if (!scrollContainer) return;
+
+        // Center Card-1 on load
+        const firstCard = scrollContainer.querySelector("#card-1");
+        if (firstCard) {
+            scrollContainer.scrollLeft = firstCard.offsetLeft - scrollContainer.offsetWidth / 2 + firstCard.offsetWidth / 2;
+            setActiveCard(firstCard.id);
+        }
+
+        const handleScroll = () => {
+            let closestCard = null;
+            let closestDistance = Infinity;
+            const containerCenter = scrollContainer.offsetWidth / 2 + scrollContainer.scrollLeft;
+
+            scrollContainer.querySelectorAll(".cash-in-cards > div").forEach((card) => {
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const distance = Math.abs(containerCenter - cardCenter);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestCard = card;
+                }
+            });
+
+            if (closestCard) setActiveCard(closestCard.id);
+        };
+
+        scrollContainer.addEventListener("scroll", handleScroll);
+        return () => scrollContainer.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const handleCashIn = async (amount) => {
-        setMessage(""); // Reset message
+        setMessage("");
 
         try {
-            const response = await addMoney(amount); // Call API
-
+            const response = await addMoney(amount);
             if (response.data.success) {
                 setMessage(`✅ Successfully added $${amount.toLocaleString()}!`);
             } else {
@@ -27,34 +68,21 @@ const CashInContainer = () => {
                 <span id="cash-in-sub-title">You may want to refill that wallet, my guy.</span>
             </div>
 
-            <div className="cash-in-cards">
-                <div id="card-1" onClick={() => handleCashIn(20)}>
-                    <span id="card-1-price-value">$20</span>
-                    <span id="card-1-title">Rookie Gambler</span>
-                </div>
-                <hr />
-                <div id="card-2" onClick={() => handleCashIn(100)}>
-                    <span id="card-2-price-value">$100</span>
-                    <span id="card-2-title">Casual Better</span>
-                </div>
-                <hr />
-                <div id="card-3" onClick={() => handleCashIn(500)}>
-                    <span id="card-3-price-value">$500</span>
-                    <span id="card-3-title">Risk Taker</span>
-                </div>
-                <hr />
-                <div id="card-4" onClick={() => handleCashIn(1000)}>
-                    <span id="card-4-price-value">$1K</span>
-                    <span id="card-4-title">High Roller</span>
-                </div>
-                <hr />
-                <div id="card-5" onClick={() => handleCashIn(10000)}>
-                    <span id="card-5-price-value">$10K</span>
-                    <span id="card-5-title">Jackpot Dreamer</span>
-                </div>
+            <div className="cash-in-cards" ref={scrollContainerRef}>
+                {cards.map(({ id, price, title, value }, index) => (
+                    <div
+                        key={index}
+                        id={`${id}`}
+                        className={`card ${activeCard === id ? "active" : ""}`}
+                        onClick={() => handleCashIn(value)}
+                    >
+                        <span id={`${id}-price-value`}>{price}</span>
+                        <span id={`${id}-title`}>{title}</span>
+                    </div>
+                ))}
             </div>
 
-            {message && <div className="cash-in-message">{message}</div>}
+            {message && <p className="cash-in-message">{message}</p>}
         </div>
     );
 };

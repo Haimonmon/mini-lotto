@@ -81,6 +81,10 @@ main {
     display: none;
 }
 
+.bottom-nav-bar-container{
+    display: none;
+}
+
 /*laptop small*/
 @media screen and (max-width: 1280px) {
     .main-container.small{
@@ -128,7 +132,7 @@ main {
     }
 
     .profile-bar-container{
-        gap: 11.5rem;
+        gap: 8rem;
         width: 600px;
     }
 
@@ -139,7 +143,7 @@ main {
 }
 
 /*Mobile*/
-@media screen and (max-width: 600px){
+@media screen and (max-width: 660px){
     .main-container.small{
         width: 100%;
         height: 100%;
@@ -148,6 +152,20 @@ main {
     }
 
     .side-bar-container.small{
+        display: none;
+    }
+
+    .bottom-nav-bar-container{
+        display: flex;
+        flex-direction: row;
+        border-top:2px solid #1C1611;
+    }
+
+    .bottom-nav-bar-container.small a{
+        text-decoration: none;
+        color: #1C1611;
+    }
+    .side-bar-container.large{
         display: none;
     }
 
@@ -164,10 +182,13 @@ main {
     .main-container.large{
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        order: 1;
     }
 
-    .side-bar-container.large{
-        display: none;
+    .main-container.large .side-bar-container.large{
+        order: 2;
     }
 
     .profile-bar-container{
@@ -178,6 +199,10 @@ main {
     main .main-inner-container {
         padding: 0;
         width: 100%;
+        height: 100%;
+    }
+
+    main {
         height: 100%;
     }
 }
