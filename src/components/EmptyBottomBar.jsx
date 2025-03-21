@@ -1,4 +1,4 @@
-import "../../styles/auth.css";
+import "../styles/auth.css";
 
 /**
  * Just empty for now but dont worry,  as the user logs it will not be empty anymore ✨👌
