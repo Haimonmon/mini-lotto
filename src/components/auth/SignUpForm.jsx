@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import Input from "../InputComponents";
+import ShowPassword from "../ShowPassword";
+import FormButton from "../FormButtonComponent";
+
+
 import { signUpUser } from "../../api/auth/AuthenticationAPI";
 
 import passwordIconUnHide from "../../assets/PASSWORD-UNHIDE-STATE.png";
@@ -53,22 +58,12 @@ const Form = () => {
 
             <form className="sign-inputs" onSubmit={handleSignup}>
                 <span id="error-message">{error}</span>
-                <input type="text" id="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
-                <input type={showPassword ? "text" : "password"} id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-                <div className="show-password-container">
-                    <img
-                     id="show-password-icon"
-                     src={showPassword ? passwordIconHide : passwordIconUnHide} 
-                     alt="password-visibility"
-                     onClick={() => {
-                        setShowPassword(!showPassword)
-                     }}
-                    />
-                    <span>{showPassword ? "Hide" : "Show"} Password</span>
-                </div>
-                <div className="lets-go-btn-container">
-                    <button type="submit">Let's Go</button>
-                </div>
+                <Input type="username" id="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <Input type={showPassword ? "text" : "password"} id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <ShowPassword className="show-password-container" src={showPassword ? passwordIconHide : passwordIconUnHide} onClick={() => {
+                    setShowPassword(!showPassword)
+                }} showpass={showPassword ? "Hide" : "Show"}/>
+                <FormButton className="lets-go-btn-container" type="submit"/>
             </form>
         </div>
     );

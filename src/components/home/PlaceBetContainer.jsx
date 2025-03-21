@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import placeBet from "../../api/home/PlaceBetAPI";
+import PlaceBetButton from "../PlaceBetButton";
 
 const PlaceBetContainer = () => {
     const [chosenNumbers, setChosenNumbers] = useState(["", "", "", "", "", ""]);
@@ -95,7 +96,11 @@ const PlaceBetContainer = () => {
                 </div>
 
                 <div className="place-bet-button-containern">
-                    <div className={`bet-card-1 ${selectedBetAmount === 20 ? "selected-card" : ""}`} onClick={() => handleBetSelection(20)}>
+                    <PlaceBetButton className={`bet-card-1 ${selectedBetAmount === 20 ? "selected-card" : ""}`} onClick={() => handleBetSelection(20)} value="$20" />
+                    <PlaceBetButton className={`bet-card-2 ${selectedBetAmount === 50 ? "selected-card" : ""}`} onClick={() => handleBetSelection(50)} value="$50" />
+                    <PlaceBetButton className={`bet-card-3 ${selectedBetAmount === 100 ? "selected-card" : ""}`} onClick={() => handleBetSelection(100)} value="$100" />
+                    <PlaceBetButton className={`bet-card-4 ${selectedBetAmount === 450 ? "selected-card" : ""}`} onClick={() => handleBetSelection(450)} value="$450" />
+                    {/* <div className={`bet-card-1 ${selectedBetAmount === 20 ? "selected-card" : ""}`} onClick={() => handleBetSelection(20)}>
                         <span>$20</span>
                     </div>
                     <div className={`bet-card-2 ${selectedBetAmount === 50 ? "selected-card" : ""}`} onClick={() => handleBetSelection(50)}>
@@ -106,7 +111,7 @@ const PlaceBetContainer = () => {
                     </div>
                     <div className={`bet-card-4 ${selectedBetAmount === 450 ? "selected-card" : ""}`} onClick={() => handleBetSelection(450)}>
                         <span>$450</span>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
