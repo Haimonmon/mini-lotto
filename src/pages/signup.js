@@ -1,6 +1,6 @@
 import Form from "../components/auth/SignUpForm.jsx";
 import MainContainer from "../components/MainContainer";
-import EmptySideBar from "../components/auth/EmptySidebar";
+import EmptySideBar from "../components/EmptySidebar";
 import SiteDescription from "../components/auth/siteDescription";
 
 import "../styles/public.css";
