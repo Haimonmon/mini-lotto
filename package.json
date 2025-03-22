@@ -7,10 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:publisher": "node src/routes/publisher.js",
-    "start:subscriber1": "node src/routes/subscriber.js",
-    "start:subscriber2": "node src/routes/subscriber.js",
-    "start:all": "concurrently \"npm run start:publisher\" \"npm run start:subscriber1\" \"npm run start:subscriber2\""
+    "dev": "concurrently \"set PORT=3000 && node server.js\" \"set PORT=3001 && node server.js\" \"set PORT=3002 && node server.js\""
   },
   "keywords": [],
   "author": "",

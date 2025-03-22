@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import "../styles/home.css";
 
-const socket = io("http://localhost:3000"); // Connect to publisher
-
 const DrawComponent = () => {
     const [winningNumbers, setWinningNumbers] = useState([]);
 
