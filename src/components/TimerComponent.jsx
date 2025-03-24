@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { io } from "socket.io-client";
-
-const socket = io("http://localhost:3000"); // Connect to the publisher
+import useSocket from '../hooks/useSocket';
 
 const TimerComponent = () => {
     const [countdown, setCountdown] = useState(60);
+    const { isConnected, socket } = useSocket();
 
     useEffect(() => {
+        if (!isConnected) return;
         // Listen for countdown updates from publisher
         socket.on("countdown", (time) => {
             setCountdown(time);
@@ -16,7 +16,7 @@ const TimerComponent = () => {
         return () => {
             socket.off("countdown");
         };
-    }, []);
+    }, [isConnected, socket]);
 
     return (
         <div className="timer-container">

@@ -5,7 +5,6 @@ import '../../styles/home.css';
 
 import DrawComponent from "../Draw.Component.jsx";
 
-const socket = io("http://localhost:3000");
 
 const MoneyPotContainer = () => {
     const [potAmount, setPotAmount] = useState(1000000);
