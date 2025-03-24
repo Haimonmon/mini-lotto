@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.bc803302.css",
-    "main.js": "/static/js/main.53be98e8.js",
+    "main.js": "/static/js/main.3a5c5f85.js",
     "static/media/RobotoMono-VariableFont_wght.ttf": "/static/media/RobotoMono-VariableFont_wght.e14e25b7c497634efdfe.ttf",
     "static/media/coin (1).png": "/static/media/coin (1).ff694e8aa39d3d6ed094.png",
     "static/media/PASSWORD-HIDE-STATE.png": "/static/media/PASSWORD-HIDE-STATE.ecd533046283cb7ab0c9.png",
@@ -15,10 +15,10 @@
     "static/media/user-question-svgrepo-com.svg": "/static/media/user-question-svgrepo-com.a57ec654b8914f2909547ee2305cba80.svg",
     "index.html": "/index.html",
     "main.bc803302.css.map": "/static/css/main.bc803302.css.map",
-    "main.53be98e8.js.map": "/static/js/main.53be98e8.js.map"
+    "main.3a5c5f85.js.map": "/static/js/main.3a5c5f85.js.map"
   },
   "entrypoints": [
     "static/css/main.bc803302.css",
-    "static/js/main.53be98e8.js"
+    "static/js/main.3a5c5f85.js"
   ]
 }

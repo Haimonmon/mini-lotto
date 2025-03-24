@@ -30,7 +30,6 @@ const Form = () => {
             const response = await  signInUser(username, password);
 
             // console.log(response);
-
             if (response.data.success) {
                 sessionStorage.setItem("token", response.data.data.token);
                 sessionStorage.setItem("username", username);
@@ -44,7 +43,6 @@ const Form = () => {
     };
 
     return (
-        
         <div className="form-container">
             <div className="account-creation-text">
                 <span className="title-sign">Spin in</span>
