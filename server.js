@@ -105,20 +105,15 @@ if (Number(PORT) === 3000) {
   function shutdownServer(reason) {
     console.log(`🛑 ${reason}`);
 
-    // Emit shutdown event to notify subscribers
     io.emit("shutdown");
 
-    // Stop emitting countdown
     clearInterval(interval);
 
-    // Close all WebSocket connections
     io.close();
 
-    // Stop the server completely (exit process)
     process.exit(1); 
   }
 
-  // Handle unexpected errors and shutdown
   process.on("uncaughtException", (err) => {
     console.error("⚠️ Uncaught Exception:", err);
     shutdownServer("Unexpected server error!");
