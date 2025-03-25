@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import TimerComponent from '../TimerComponent.jsx';
-import { io } from "socket.io-client";
 import '../../styles/home.css';
-
+import useSocket from "../../hooks/useSocket.js";
 import DrawComponent from "../Draw.Component.jsx";
 
 
 const MoneyPotContainer = () => {
     const [potAmount, setPotAmount] = useState(1000000);
+    const { isConnected, socket } = useSocket();
     useEffect(() => {
         // ✅ Listen for pot updates
+        if(!isConnected) return;
         socket.on("pot_update", (data) => {
             console.log("💰 New Pot Amount:", data.data.amount.pot_amount);
             setPotAmount(data.data.amount.pot_amount);
         });
         return () => {
             socket.off("pot_update");
-            socket.off("draw_result");
         };
     });
     return (

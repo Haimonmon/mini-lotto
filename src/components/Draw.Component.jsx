@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { io } from "socket.io-client";
 import "../styles/home.css";
+import useSocket from "../hooks/useSocket";
 
 const DrawComponent = () => {
     const [winningNumbers, setWinningNumbers] = useState([]);
+    const { isConnected, socket } = useSocket();
 
     useEffect(() => {
         // Listen for draw result updates
+        if (!isConnected) return;
         socket.on("draw_result", (data) => {
             console.log("🎯 New Draw Result:", data);
 
@@ -22,7 +24,7 @@ const DrawComponent = () => {
         return () => {
             socket.off("draw_result");
         };
-    }, []);
+    }, [isConnected, socket]);
 
     return (
                 <div className="winning-num-container">
