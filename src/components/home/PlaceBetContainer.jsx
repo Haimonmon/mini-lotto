@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import placeBet from "../../api/home/PlaceBetAPI";
 import PlaceBetButton from "../PlaceBetButton";
+import useSocket from "../../hooks/useSocket";
 
 const PlaceBetContainer = () => {
     const [chosenNumbers, setChosenNumbers] = useState(["", "", "", "", "", ""]);
@@ -8,6 +9,20 @@ const PlaceBetContainer = () => {
     const [invalidNumbers, setInvalidNumbers] = useState([]);
     const [hasErrors, setHasErrors] = useState(false);
     const [liveBets, setLiveBets] = useState([]);
+    const { isConnected, socket } = useSocket();
+
+    useEffect(() => {
+        if(!isConnected) return;
+        // ✅ Listen for real-time bets from publisher
+        socket.on("new_bet", (betData) => {
+            console.log("🔴 New Bet Received:", betData);
+            setLiveBets((prevBets) => [betData, ...prevBets]);
+        });
+
+        return () => {
+            socket.off("new_bet");
+        };
+    }, []);
 
     const handleNumberChange = (index, value) => {
         if (!/^\d*$/.test(value)) return; 
@@ -118,8 +133,9 @@ const PlaceBetContainer = () => {
             <div className="bet-container">
                 <div className="bet-button" onClick={handlePlaceBet}>
                     <span>Bet</span>
+                    
                 </div>
-            </div>
+            </div>         
         </div>
     );
 };

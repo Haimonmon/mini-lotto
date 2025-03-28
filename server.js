@@ -4,10 +4,10 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const { io: ClientIO } = require('socket.io-client');
-const axios = require('axios')
+const axios = require('axios');
 
 const IS_PRODUCTION = process.env.ENV || 'production' === 'production';
-console.log(IS_PRODUCTION)
+console.log(IS_PRODUCTION);
 const PORT = process.env.PORT || 3000;
 const PUBLISHER_URL = 'http://localhost:3000';
 
@@ -33,7 +33,7 @@ if (IS_PRODUCTION) {
   });
 }
 
-console.log(process.env.PORT)
+console.log(process.env.PORT);
 
 if (Number(PORT) === 3000) {
   console.log('Running as HOST (Publisher)');
@@ -80,22 +80,20 @@ if (Number(PORT) === 3000) {
   startCountdown();
 
   const fetchPotAmount = async () => {
-      try {
-          const { data } = await axios.get("http://localhost:8000/v1/pot/", {
-              headers: {
-                  apikey: "nigga",
-              },
-          });
-  
-          console.log("💰 Pot Amount:", data);
-  
-          // ✅ Emit pot amount to subscribers
-          io.emit("pot_update", data);
-      } catch (error) {
-          console.error("❌ Failed to fetch pot amount:", error.message);
-      }
+    try {
+      const { data } = await axios.get("http://localhost:8000/v1/pot/", {
+        headers: { apikey: "nigga" },
+      });
+
+      console.log("💰 Pot Amount:", data);
+
+      // ✅ Emit pot amount to subscribers
+      io.emit("pot_update", data);
+    } catch (error) {
+      console.error("❌ Failed to fetch pot amount:", error.message);
+    }
   };
-  
+
   // ✅ Call fetchPotAmount every 15 seconds
   setInterval(fetchPotAmount, 15000);
 
@@ -108,10 +106,8 @@ if (Number(PORT) === 3000) {
     io.emit("shutdown");
 
     clearInterval(interval);
-
     io.close();
-
-    process.exit(1); 
+    process.exit(1);
   }
 
   process.on("uncaughtException", (err) => {
@@ -123,49 +119,75 @@ if (Number(PORT) === 3000) {
     console.error("⚠️ Unhandled Promise Rejection:", reason);
     shutdownServer("Unhandled promise rejection!");
   });
+
+  io.on("connection", (socket) => {
+    console.log(`Subscriber connected to Publisher: ${socket.id}`);
+
+    socket.on("user_online", (username) => {
+      if (username && username !== "Guest") {
+        onlineUsers.add(username);
+        io.emit("online_users", Array.from(onlineUsers));
+        console.log("👥 Online Users:", onlineUsers);
+      }
+    });
+
+    socket.on("place_bet", (betData) => {
+      console.log("Received bet from subscriber:", betData);
+
+      // ✅ Broadcast bet to all subscribers
+      io.emit("new_bet", betData);
+    });
+
+    socket.on("disconnect", () => {
+      console.log(`Subscriber disconnected: ${socket.id}`);
+      onlineUsers.forEach((user) => {
+        if (socket.id === user.socketId) {
+          onlineUsers.delete(user);
+        }
+      });
+
+      io.emit("online_users", Array.from(onlineUsers));
+    });
+  });
+
 } else {
   let isPublisherConnected = false;
   const publisherSocket = ClientIO(PUBLISHER_URL);
 
-  publisherSocket.on('connect', () => {
+  publisherSocket.on("connect", () => {
     console.log(`✅ Subscriber (${PORT}) connected to Publisher (3000)`);
     isPublisherConnected = true;
   });
 
-  publisherSocket.on('disconnect', () => {
+  publisherSocket.on("disconnect", () => {
     console.log(`⚠️ Publisher (3000) disconnected! Stopping data emission.`);
     isPublisherConnected = false;
     io.emit("maintenance_mode", true);
   });
 
-  publisherSocket.on('shutdown', () => {
+  publisherSocket.on("shutdown", () => {
     console.log(`🛑 Publisher sent shutdown signal!`);
     isPublisherConnected = false;
     io.emit("maintenance_mode", true);
   });
 
-  // Listen for draw results from Publisher
-  publisherSocket.on('countdown', (data) => {
-    if (isPublisherConnected) {
-      console.log(`Subscriber (${PORT}) received countdown:, data`);
-      io.emit('countdown', data); // ✅ Only emit if publisher is connected
-    }
-  });
-  publisherSocket.on('draw_result', (data) => {
-    if (isPublisherConnected) {
-      console.log(`Subscriber (${PORT}) received countdown:, data`);
-      io.emit('draw_result', data); // ✅ Only emit if publisher is connected
-    }
-  });
-  publisherSocket.on('pot_update', (data) => {
-    if (isPublisherConnected) {
-      console.log(`Subscriber (${PORT}) received countdown:, data`);
-      io.emit('pot_update', data); // ✅ Only emit if publisher is connected
-    }
+  // ✅ Forward data from Publisher to connected clients
+  ["countdown", "draw_result", "pot_update"].forEach((event) => {
+    publisherSocket.on(event, (data) => {
+      if (isPublisherConnected) {
+        console.log(`Subscriber (${PORT}) received ${event}:`, data);
+        io.emit(event, data);
+      }
+    });
   });
 
-  // Handle client connections
-  io.on('connection', (socket) => {
+  publisherSocket.on("online_users", (users) => {
+    console.log("📢 Received online users list:", users);
+    io.emit("online_users", users);
+  });
+
+  // ✅ Forward bet to Publisher
+  io.on("connection", (socket) => {
     console.log(`Client connected to Subscriber (${PORT}): ${socket.id}`);
 
     // If publisher is disconnected, immediately inform client
@@ -173,65 +195,26 @@ if (Number(PORT) === 3000) {
       socket.emit("maintenance_mode", true);
     }
 
-    socket.on('disconnect', () => {
+    // ✅ Listen for user bets and forward them to the publisher
+    socket.on("place_bet", (betData) => {
+      console.log(`Received bet from client:`, betData);
+      if (isPublisherConnected) {
+        publisherSocket.emit("place_bet", betData);
+      }
+    });
+
+    socket.on("disconnect", () => {
       console.log(`Client disconnected from Subscriber (${PORT}): ${socket.id}`);
     });
+  });
+
+  // ✅ Receive new bets from Publisher and forward to clients
+  publisherSocket.on("new_bet", (betData) => {
+    console.log("New bet received from Publisher:", betData);
+    io.emit("new_bet", betData);
   });
 }
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-// // ✅ WebSocket Connection
-// io.on('connection', (socket) => {
-//   console.log('User connected:', socket.id);
-//   socket.emit('welcome', 'A message from the server');
-
-//   socket.on('disconnect', () => {
-//     console.log('User disconnected:', socket.id);
-//   });
-// });
-
-// let countdown = 60;
-// let nextCountdown = 15;
-
-// const startCountdown = () => {
-//   let interval = setInterval(async () => {
-//     if (countdown > 0) {
-//       countdown--;
-//     } else {
-//       console.log("🎉 Time's up! Fetching draw results...");
-
-//       try {
-//         // ✅ Fetch draw results from API
-//         const { data } = await axios.post("http://localhost:8000/v1/draw/", {}, {
-//           headers: {
-//             apikey: "nigga"
-//           }
-//         });
-
-//         console.log("🎯 Draw Result:", data);
-
-//         // ✅ Broadcast draw result to subscribers
-//         io.emit("draw_result", data);
-
-//         // ✅ Reset countdown for the next round
-//         countdown = nextCountdown;
-
-//         // ✅ Wait before restarting the countdown
-//         setTimeout(() => {
-//           console.log("🔄 New round starting...");
-//           countdown = 60;
-//         }, nextCountdown * 1000);
-//       } catch (error) {
-//         console.error("❌ Failed to fetch draw result:", error.message);
-//       }
-//     }
-
-//     // console.log(`⏳ Countdown: ${countdown}s`);
-//     io.emit("countdown", countdown);
-//   }, 1000);
-// };
-
-// startCountdown();
