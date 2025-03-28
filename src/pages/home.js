@@ -9,6 +9,7 @@ import BottomNavigation from "../components/BottomNavBar.jsx";
 // * Not Complete 💀👌✨
 const Home = () => {
     return (
+        <>
         <MainContainer size="large">
             <NavigationBar/>
             <PageContainer>
@@ -17,6 +18,8 @@ const Home = () => {
             </PageContainer>
             <BottomNavigation />
         </MainContainer>
+        
+        </>
     );
 }
 

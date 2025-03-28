@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "../styles/container.css";
 import "../styles/navigation.css";
@@ -15,6 +15,13 @@ import PlaneThatHitTheTowerIcon from "../assets/airplane-svgrepo-com.svg";
  */
 const BottomNavigation = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+    
+        const handleLogout = () => {
+            sessionStorage.removeItem("username");
+            sessionStorage.removeItem("token");
+            navigate("/sign-in");
+        };
 
     return (
         <nav className="bottom-nav-bar-container small">
@@ -39,7 +46,7 @@ const BottomNavigation = () => {
                     </div>
                 </Link>            
                 
-                <div id="logout-button">
+                <div id="logout-button" onClick={handleLogout}>
                     <img src={PlaneThatHitTheTowerIcon} alt="logout page icon"/>
                     <span>Log out</span>
                 </div>

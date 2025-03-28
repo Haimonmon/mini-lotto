@@ -234,10 +234,72 @@
 
 /*Tablet*/
 @media screen and (max-width: 930px){
-    
+    .chosen-number-container{
+        gap: 4%;
+        padding: 15px 0 0 0;
+    }
+
+    .ready-bet{
+        gap: 5%;
+    }
+
+    .place-bet-button-containern{
+        gap: 4%;
+        height: 130px;
+    }
+    .bet-card-1, .bet-card-2, .bet-card-3,
+    .bet-card-4{
+        height: 100px;
+    }
 }
 
 /* MObile*/
 @media screen and (max-width: 660px){
+    .place-bet-container{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        border: none;
+        border-top: 1px solid #1C1611;
+    }
 
+    .chosen-number-container{
+        display: flex;
+        flex-wrap: wrap;
+        width: 60%;
+        gap: 12px;
+    }
+
+    .ready-bet{
+        width: 100%;
+    }
+
+    .place-bet-button-containern{
+        width: 100%;
+        border-top: 1px solid #1C1611;
+        border-bottom: 1px solid #1C1611;
+        margin: 15px 0 0 0;
+    }
+
+    .bet-container{
+        width: 100%;
+        padding: 15px 0 15px 0;
+    }
+
+    .pot-money-container{
+        width: 100%;
+    }
+
+    .pot-money-outer-container{
+        padding: 0.6% 0 0.6% 0;
+    }
+
+    .pot-money-container span{
+        font-size: 3.3rem;
+    }
+
+    .winning-num-container{
+        width: 80.3%;
+        height: 36%;
+    }
 }
