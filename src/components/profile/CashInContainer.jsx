@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { addMoney } from "../../api/ProfileApi";
+import { addMoney, getWalletMoney } from "../../api/ProfileApi";
 
 const CashInContainer = () => {
     const [message, setMessage] = useState("");
+    const [walletBalance, setWalletBalance] = useState(getWalletMoney());
     const scrollContainerRef = useRef(null);
     const [activeCard, setActiveCard] = useState(null);
     
@@ -52,7 +53,15 @@ const CashInContainer = () => {
         try {
             const response = await addMoney(amount);
             if (response.data.success) {
+                const newBalance = response.data.new_balance;
                 setMessage(`✅ Successfully added $${amount.toLocaleString()}!`);
+
+                setWalletBalance(newBalance);
+                const walletElement = document.getElementById("wallet-money");
+                console.log(response);
+                if (walletElement) {
+                    walletElement.textContent = `$ ${newBalance.toLocaleString()}`;
+                }
             } else {
                 setMessage(`❌ Failed: ${response.data.message || "Error occurred"}`);
             }
@@ -81,8 +90,6 @@ const CashInContainer = () => {
                     </div>
                 ))}
             </div>
-
-            {message && <p className="cash-in-message">{message}</p>}
         </div>
     );
 };

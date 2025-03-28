@@ -8,7 +8,7 @@ import { getProfile } from "../../api/ProfileApi";
 const WalletContainer = () => {
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
-    
+
     useEffect(() => {
         const fetchProfile = async () => {
             try {
