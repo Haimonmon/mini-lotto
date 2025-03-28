@@ -26,6 +26,8 @@ const Form = () => {
         e.preventDefault();
         setError("");
 
+        console.log(error)
+
         if (username.length < 8 || username.length > 10) {
             setError("Username must be at least 8 characters long.");
             return;
@@ -42,9 +44,12 @@ const Form = () => {
             if (response.data.success) {
                 navigate("/");
             } else {
+                console.log(response)
                 throw new Error(response.data.message || "Signup failed");
             }
         } catch (err) {
+            console.log(err)
+            console.log(error)
             setError(err.message);
         }
     };

@@ -32,6 +32,8 @@ class SPA {
         return (
             <Router>
                 <Routes>
+                    <Route/>
+                    
                     {
                         this.routes.map((route, index) => (
                             <Route key={index} path={route.pathURL} element={route.element} />

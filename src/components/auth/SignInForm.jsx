@@ -26,10 +26,12 @@ const Form = () => {
         e.preventDefault();
         setError("");
 
+        console.log(error)
+
         try {
             const response = await  signInUser(username, password);
 
-            // console.log(response);
+            console.log(response);
             if (response.data.success) {
                 sessionStorage.setItem("token", response.data.data.token);
                 sessionStorage.setItem("username", username);

@@ -15,7 +15,7 @@ const Home = () => {
                 <MoneyPotContainer/>
                 <PlaceBetContainer/>
             </PageContainer>
-            <BottomNavigation />
+            <BottomNavigation/>
         </MainContainer>
     );
 }
