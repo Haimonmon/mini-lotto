@@ -1,4 +1,5 @@
 import SPA from "./core/spa.js";
+import authGuard from "./middlewares/authGuard.js";
 
 import Home from "./pages/home.js";
 import SignUp from "./pages/signup.js";
@@ -14,9 +15,9 @@ app.add('/sign-in', SignIn);
 
 app.add('/sign-up', SignUp);
 
-app.add('/home', Home);
+app.add('/home', authGuard(Home));
 
-app.add('/profile', Profile);
+app.add('/profile', authGuard(Profile));
 
 // Renders the app along with the registered routes 👌✨
 app.render();

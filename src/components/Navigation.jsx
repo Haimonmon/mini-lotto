@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import CozyGamblerIcon from "../assets/crown (1).png";
 import DiceIcon from "../assets/dice-3-svgrepo-com.svg";
@@ -14,6 +14,13 @@ import "../styles/container.css";
  * @returns navigation element
  */
 const NavigationBar = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        sessionStorage.removeItem("username");
+        sessionStorage.removeItem("token");
+        navigate("/sign-in");
+    };
     return (
         <nav className="side-bar-container large">
             <div className="necessity-container">
@@ -35,14 +42,11 @@ const NavigationBar = () => {
                 </Link>
                
             </div>
-
             <div className="support-container">
-
-                <div id="logout-button">
+                <div id="logout-button" onClick={handleLogout}>
                     <img src={PlaneThatHitTheTowerIcon} alt="logout page icon"/>
                     <span>Log out</span>
                 </div>
-
             </div>
         </nav>
     )
