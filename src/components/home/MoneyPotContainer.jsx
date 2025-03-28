@@ -11,19 +11,22 @@ const MoneyPotContainer = () => {
     useEffect(() => {
         // ✅ Listen for pot updates
         if(!isConnected) return;
-        socket.on("pot_update", (data) => {
-            console.log("💰 New Pot Amount:", data.data.amount.pot_amount);
-            setPotAmount(data.data.amount.pot_amount);
+        socket.on("app_state_update_pot_money", (data) => {
+            console.log("💰 New Pot Amount:", data);
+
+            if (data) {
+                setPotAmount(data);                
+            }
         });
         return () => {
-            socket.off("pot_update");
+            socket.off("app_state_update_pot_money");
         };
     });
     return (
         <div className="pot-money-outer-container">
             <div className="pot-money-inner-container">
                 <div className="pot-money-container">
-                    <span>${potAmount.toLocaleString()}</span> {/* Format as currency */}
+                    <span>${potAmount.toLocaleString()}</span>
                     <hr />
                 </div>
 
