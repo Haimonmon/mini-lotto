@@ -41,6 +41,11 @@ if (Number(PORT) === 3000) {
   let nextCountdown = 15;
   let interval = null; // Store interval reference
 
+  const appState = {
+    potMoney: null,
+    winningNumbers: null,
+  }
+
   const startCountdown = () => {
     interval = setInterval(async () => {
       try {
@@ -56,6 +61,8 @@ if (Number(PORT) === 3000) {
 
           console.log("🎯 Draw Result:", data);
 
+          appState.winningNumbers = data.data.winning_no;
+
           // ✅ Broadcast draw result to subscribers
           io.emit("draw_result", data);
 
@@ -68,6 +75,9 @@ if (Number(PORT) === 3000) {
           }, nextCountdown * 1000);
         }
 
+        // ✅ Broadcast updated results of the appState
+        io.emit("app_state_update_pot_money", appState.potMoney);
+        io.emit("app_state_update_draw_number", appState.winningNumbers);
         io.emit("countdown", countdown);
       } catch (error) {
         console.error("❌ Server Error: ", error.message);
@@ -87,6 +97,8 @@ if (Number(PORT) === 3000) {
           });
   
           console.log("💰 Pot Amount:", data);
+
+          appState.potMoney = data.data.amount.pot_amount
   
           // ✅ Emit pot amount to subscribers
           io.emit("pot_update", data);
@@ -96,7 +108,7 @@ if (Number(PORT) === 3000) {
   };
   
   // ✅ Call fetchPotAmount every 15 seconds
-  setInterval(fetchPotAmount, 15000);
+  setInterval(fetchPotAmount, 20000);
 
   /** 
    * 🛑 Graceful Shutdown Function 
@@ -146,20 +158,36 @@ if (Number(PORT) === 3000) {
   // Listen for draw results from Publisher
   publisherSocket.on('countdown', (data) => {
     if (isPublisherConnected) {
-      console.log(`Subscriber (${PORT}) received countdown:, data`);
+      console.log(`Subscriber (${PORT}) received countdown:, ${data}`);
       io.emit('countdown', data); // ✅ Only emit if publisher is connected
     }
   });
+
   publisherSocket.on('draw_result', (data) => {
     if (isPublisherConnected) {
-      console.log(`Subscriber (${PORT}) received countdown:, data`);
+      console.log(`Subscriber (${PORT}) received draw_result:, ${data}`);
       io.emit('draw_result', data); // ✅ Only emit if publisher is connected
     }
   });
+
   publisherSocket.on('pot_update', (data) => {
     if (isPublisherConnected) {
-      console.log(`Subscriber (${PORT}) received countdown:, data`);
+      console.log(`Subscriber (${PORT}) received pot_update:, ${data}`);
       io.emit('pot_update', data); // ✅ Only emit if publisher is connected
+    }
+  });
+
+  publisherSocket.on('app_state_update_pot_money', (data) => {
+    if (isPublisherConnected) {
+      console.log(`Subscriber (${PORT}) received app_state_update:, ${data}`);
+      io.emit('app_state_update_pot_money', data); // ✅ Only emit if publisher is connected
+    }
+  });
+
+  publisherSocket.on('app_state_update_draw_number', (data) => {
+    if (isPublisherConnected) {
+      console.log(`Subscriber (${PORT}) received app_state_update:, ${data}`);
+      io.emit('app_state_update_draw_number', data); // ✅ Only emit if publisher is connected
     }
   });
 
