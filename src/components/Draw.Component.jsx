@@ -8,21 +8,30 @@ const DrawComponent = () => {
 
     useEffect(() => {
         // Listen for draw result updates
-        if (!isConnected) return;
-        socket.on("draw_result", (data) => {
+        if (!isConnected) {
+            console.log('DISCONNECTED')
+            return;
+        };
+
+        socket.onAny((event, data) => {
+            console.log(`📡 Received event: ${event}`, data);
+        });
+
+        socket.on("app_state_update_draw_number", (data) => {
             console.log("🎯 New Draw Result:", data);
 
-            if (data.success && typeof data.data?.winning_no === "string") {
+            if (data && typeof data === "string") {
                 // ✅ Convert "XX-XX-XX-XX-XX-XX" into an array of numbers
-                const numbersArray = data.data.winning_no.split("-").map(Number);
+                const numbersArray = data.split("-").map(Number);
                 setWinningNumbers(numbersArray);
+                console.log(winningNumbers.length)
             } else {
                 setWinningNumbers([]); // Reset if invalid
             }
         });
 
         return () => {
-            socket.off("draw_result");
+            socket.off("app_state_update_draw_number");
         };
     }, [isConnected, socket]);
 
