@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
-import { io } from "socket.io-client";
-
-const socket = io("http://localhost:3000");
+import useSocket from "../hooks/useSocket";
 
 import QuestionableGamblersIcon from '../assets/user-question-svgrepo-com.svg';
 import ProfilePicture from '../assets/0c42be6660f5afc7cf6e7e32c43496ca.jpg';
@@ -12,16 +9,16 @@ import logoIcon from '../assets/crown (1).png';
 const ProfileBarContainer = () => {
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [username, setUsername] = useState("");
+    const { isConnected, socket } = useSocket();
 
     useEffect(() => {
       const storedUsername = sessionStorage.getItem("username");
 
       if (storedUsername !== "Guest") {
         setUsername(storedUsername);
-        socket.emit("user_joined", storedUsername);
       }
      
-  
+      if (!isConnected) return;
       socket.on("online_users", (users) => {
           console.log("👥 Total Online Users:", users);
           setOnlineUsers(users);
