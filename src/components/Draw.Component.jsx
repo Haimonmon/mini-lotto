@@ -13,9 +13,7 @@ const DrawComponent = () => {
             return;
         };
 
-        socket.onAny((event, data) => {
-            console.log(`📡 Received event: ${event}`, data);
-        });
+       
 
         socket.on("app_state_update_draw_number", (data) => {
             console.log("🎯 New Draw Result:", data);

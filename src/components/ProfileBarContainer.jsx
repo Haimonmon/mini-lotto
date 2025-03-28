@@ -17,8 +17,14 @@ const ProfileBarContainer = () => {
       if (storedUsername !== "Guest") {
         setUsername(storedUsername);
       }
-     
+
+  
       if (!isConnected) return;
+
+      socket.onAny((event, data) => {
+        console.log(`📡 Received event: ${event}`, data);
+      });
+
       socket.on("online_users", (users) => {
           console.log("👥 Total Online Users:", users);
           setOnlineUsers(users);

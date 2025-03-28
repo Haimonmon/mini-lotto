@@ -133,35 +133,40 @@ if (Number(PORT) === 3000) {
     shutdownServer("Unhandled promise rejection!");
   });
 
-  io.on("connection", (socket) => {
-    console.log(`Subscriber connected to Publisher: ${socket.id}`);
+  // const onlineUsers = new Map();
 
-    socket.on("user_online", (username) => {
-      if (username && username !== "Guest") {
-        onlineUsers.add(username);
-        io.emit("online_users", Array.from(onlineUsers));
-        console.log("👥 Online Users:", onlineUsers);
-      }
-    });
+  // io.on("connection", (socket) => {
+  //   console.log(`Subscriber connected to Publisher: ${socket.id}`);
+  //   console.log(onlineUsers)
 
-    socket.on("place_bet", (betData) => {
-      console.log("Received bet from subscriber:", betData);
+  //   socket.on("user_online", (username) => {
+  //     console.log(username)
+  //     if (username && username !== "Guest") {
+  //       onlineUsers.add(username);
+  //       console.log("🔥 Emitting online_users event:", Array.from(onlineUsers.values()));
+  //       io.emit("online_users", Array.from(onlineUsers));
+  //       console.log("👥 Online Users:", onlineUsers);
+  //     }
+  //   });
 
-      // ✅ Broadcast bet to all subscribers
-      io.emit("new_bet", betData);
-    });
+  //   socket.on("place_bet", (betData) => {
+  //     console.log("Received bet from subscriber:", betData);
 
-    socket.on("disconnect", () => {
-      console.log(`Subscriber disconnected: ${socket.id}`);
-      onlineUsers.forEach((user) => {
-        if (socket.id === user.socketId) {
-          onlineUsers.delete(user);
-        }
-      });
+  //     // ✅ Broadcast bet to all subscribers
+  //     io.emit("new_bet", betData);
+  //   });
 
-      io.emit("online_users", Array.from(onlineUsers));
-    });
-  });
+  //   socket.on("disconnect", () => {
+  //     console.log(`Subscriber disconnected: ${socket.id}`);
+  //     onlineUsers.forEach((user) => {
+  //       if (socket.id === user.socketId) {
+  //         onlineUsers.delete(user);
+  //       }
+  //     });
+
+  //     io.emit("online_users", Array.from(onlineUsers));
+  //   });
+  // });
 
 } else {
   let isPublisherConnected = false;
