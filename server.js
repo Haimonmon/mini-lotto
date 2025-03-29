@@ -107,8 +107,8 @@ if (Number(PORT) === 3000) {
       }
   };
 
-  // ✅ Call fetchPotAmount every 15 seconds
-  setInterval(fetchPotAmount, 20000);
+  // ✅ Call fetchPotAmount every 10 seconds
+  setInterval(fetchPotAmount, 10000);
 
   /** 
    * 🛑 Graceful Shutdown Function 
