@@ -21,6 +21,8 @@
     align-items: center;
     box-sizing: border-box;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .pot-money-container {
@@ -55,6 +57,8 @@
     width: 175px;
     height: 31px;
     box-sizing: border-box;
+    background-color: #FFEFD7;
+    z-index: 1;
 }
 
 .timer-container span {
@@ -210,6 +214,40 @@
     border-bottom: 5px solid #1C1611;
     background-color: #6FD955;
     box-shadow: 9px 0px 0px rgba(0, 0, 0, 0.3);
+}
+
+.winning-popup {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #6FD955;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: -101%;
+    transition: bottom 0.7s ease-in-out;
+    font-weight: 500;
+    font-size: 3rem;
+    font-family: var(--font-medium);
+}
+
+.winning-popup.show {
+    bottom: 0;
+}
+
+.winning-popup.win {
+    background: #6FD955;
+    font-family: var(--font-medium);
+}
+
+
+.winning-popup.lose {
+    background: #F98E58;
+}
+
+
+.winning-popup.round-ended {
+    background: #F6D93C;
 }
 
 /*laptop small*/
