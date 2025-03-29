@@ -3,11 +3,13 @@ import TimerComponent from '../TimerComponent.jsx';
 import '../../styles/home.css';
 import useSocket from "../../hooks/useSocket.js";
 import DrawComponent from "../Draw.Component.jsx";
-
+import WinningPopUpContainer from "../WinningPopUpContainer.jsx";
 
 const MoneyPotContainer = () => {
     const [potAmount, setPotAmount] = useState(1000000);
     const { isConnected, socket } = useSocket();
+    const [status, setStatus] = useState("");
+    
     useEffect(() => {
         // ✅ Listen for pot updates
         if(!isConnected) return;
@@ -34,6 +36,7 @@ const MoneyPotContainer = () => {
 
                 <TimerComponent />
 
+                <WinningPopUpContainer/>
             </div>
         </div>
     )
